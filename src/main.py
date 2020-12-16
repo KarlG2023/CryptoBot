@@ -6,32 +6,11 @@ import math
 from poloniex import Poloniex
 import os
 
-class main(object):
-    def __init__(self):
-        self.credentials = 0
+import account
+import charts
+import trades
 
-    def log(self):
-        try:
-            if len(sys.argv) != 3:
-                exit(84)
-        except Exception as e:
-            print("Unexpected error:", e)
-            exit(84)
+obj_poloniex = account.log()
 
-    def get_account_data(self):
-        api_key = sys.argv[1]
-        api_secret = sys.argv[2]
-        polo = Poloniex(api_key, api_secret)
-        
-        # ticker = polo.returnTicker()['USDT_BTC']
-        # print(ticker)
-        
-        balances = polo.returnBalances()
-        print(balances)
-        
-        # help(polo)
-        # print(polo.returnChartData(['USDT_BTC'], 86400, start=1605450419, end=1608042419 ))
-
-obj_main = main()
-obj_main.log()
-obj_main.get_account_data()
+# API-KEY IK93HX6R-1RLQR66Q-ZA68OZD0-D1ADEV51
+# SECRET 94a9667e060d10fc0cee29fe9b0e79ac7490acef8eb86a8105706beb6521757e40d57c033ca8d3f620010c5f539b442fb812fba2d24f4006454425c8132567a6
