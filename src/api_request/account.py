@@ -6,12 +6,8 @@ import math
 from poloniex import Poloniex
 import os
 
-def log():
+def log(api_key, api_secret):
     try:
-        if len(sys.argv) != 3:
-            exit(84)
-        api_key = sys.argv[1]
-        api_secret = sys.argv[2]
         polo = Poloniex(api_key, api_secret)
         return polo
     except Exception as e:
