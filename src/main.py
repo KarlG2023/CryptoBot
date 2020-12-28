@@ -43,7 +43,7 @@ class MainWindow(QMainWindow):
 
         self.poloniex_obj = self.log_UI()
 
-        self.currencies_json = data.currencies.currencies_json(self.poloniex_obj)
+        # self.currencies_json = data.currencies.currencies_json(self.poloniex_obj)
         self.charts_json = data.charts.charts_json(self.poloniex_obj)
 
         self.setWindowTitle("CyptoBot")
@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         # poloniex_obj = log(api_credentials[0], api_credentials[1])
     
         # comment the next line for password feature
-        poloniex_obj = log("IK93HX6R-1RLQR66Q-ZA68OZD0-D1ADEV51", "94a9667e060d10fc0cee29fe9b0e79ac7490acef8eb86a8105706beb6521757e40d57c033ca8d3f620010c5f539b442fb812fba2d24f4006454425c8132567a6")
+        poloniex_obj = log("4Z69MO3Y-JT0EDZS8-RG86RCYZ-FOFNHGTH", "a34c54261425e235a1ea3b4d87de52cabedbd115169ac146cc17a00d0765847b0f005ac02cb877f822f9c82a10680ac882f57eab87132a10c2f16e8fa8d4c63e")
 
         return poloniex_obj
 
@@ -99,8 +99,8 @@ class MainWindow(QMainWindow):
         label.setAlignment(Qt.AlignCenter)
         self.setCentralWidget(label)
         if int(time.strftime("%S")) % 10 == 0:
-            # self.charts_json.print_data()
-            self.currencies_json.print_data()
+            self.charts_json.print_data()
+            # self.currencies_json.print_data()
             # do some shit each %S/%M/%H seconds/minutes/hours (do it on a thread pls)
 
 if __name__ == '__main__':
@@ -110,5 +110,5 @@ if __name__ == '__main__':
     dashboard.show()
     app.exec_()
 
-# API-KEY IK93HX6R-1RLQR66Q-ZA68OZD0-D1ADEV51
-# SECRET 94a9667e060d10fc0cee29fe9b0e79ac7490acef8eb86a8105706beb6521757e40d57c033ca8d3f620010c5f539b442fb812fba2d24f4006454425c8132567a6
+# API-KEY 4Z69MO3Y-JT0EDZS8-RG86RCYZ-FOFNHGTH
+# SECRET a34c54261425e235a1ea3b4d87de52cabedbd115169ac146cc17a00d0765847b0f005ac02cb877f822f9c82a10680ac882f57eab87132a10c2f16e8fa8d4c63e
