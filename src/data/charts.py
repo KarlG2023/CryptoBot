@@ -24,6 +24,8 @@ class charts_json:
         self.data = str(api_request.charts.get_chart_data(self.poloniex_obj, ['USDT_BTC'], 900, start=int(time.time())-(86400*30), end=int(time.time()))).replace("'", '"')
         self.data2 = self.data.replace("None", "null")
 
+
+    # putting a full month in json
     def get_data(self):
         data = []
         new_data = []
@@ -38,8 +40,6 @@ class charts_json:
                     tmp = str()
                     i += 1
             tmp += str(self.data2[i])
-        #with open('data/json/cryptocurrencies.json', 'w') as f:
-            #json.dump(self.data2, f)
         for i in range(1, len(data)):
             new_tmp = {}
             data_row = []
@@ -63,8 +63,13 @@ class charts_json:
         with open("data/json/cryptocurrencies.json", "w") as outfile:
             json.dump(data_json, outfile)
 
-    def print_data(self):
-        with open("data/json/cryptocurrencies.json") as json_file:
+    # extract the json values from a given json
+    # put path of the json to extract and select a element to extract
+    # you will receive a list with every values for an element ask
+    def print_data(self, path, element):
+        res = []
+        with open(path) as json_file:
             data_json = json.load(json_file)
             for i in data_json["candle"]:
-                print(i["date"])
+                res.append(i[element])
+        return res
