@@ -2,3 +2,4 @@ src/__pycache__/
 src/api_request/__pycache__
 src/data/__pycache__
 src/chart_analysis/__pycache__
+src/widgets/__pycache__
