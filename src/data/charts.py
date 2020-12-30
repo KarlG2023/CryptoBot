@@ -60,7 +60,7 @@ class charts_json:
                 new_tmp[a[0]] = a[1]
             data_json['candle'].append(new_tmp)
         
-        with open("data/json/cryptocurrencies.json", "w") as outfile:
+        with open("data/json/charts.json", "w") as outfile:
             json.dump(data_json, outfile)
 
     # extract the json values from a given json

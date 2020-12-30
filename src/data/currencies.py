@@ -27,6 +27,8 @@ class currencies_json:
         # os.remove("data/json/cryptocurrencies.json")
 
         # create file if it doesnt exist with basic currencies, load json object and write it for next session
+        if not os.path.exists('data/json'):
+            os.makedirs('data/json')
         if os.path.isfile("data/json/cryptocurrencies.json") == False:
             # self.currencies = ['BTC', 'ETH', 'LTC']
             self.data = {}
@@ -61,12 +63,14 @@ class currencies_json:
             })
             with open('data/json/cryptocurrencies.json', 'w') as outfile:
                 json.dump(self.data, outfile)
+        else:
+            with open('data/json/cryptocurrencies.json') as json_file:
+                self.data = json.load(json_file)
     
     # debug
     def print_data(self):
-        with open('data/json/cryptocurrencies.json') as json_file:
-            self.data = json.load(json_file)
-            print(self.data["name"])
+        for p in self.data['crypto']:
+            print('Name: ' + p['name'])
     
     def add_currency(self, name):
         self.currencies.append(name)
