@@ -36,17 +36,28 @@ class Bitcoin(QtWidgets.QWidget):
   
         widget_1_content = get_widget_1_content("BTC")
 
-        layout = QtWidgets.QHBoxLayout()
+        layout = QtWidgets.QGridLayout()
 
         self.widget_1 = QtWidgets.QLabel(widget_1_content)
         self.widget_1.setAlignment(QtCore.Qt.AlignLeft)
         self.widget_1.setFixedWidth(250)
     
-        self.label = QtWidgets.QLabel('Bitcoin page!')
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.algo_1 = QtWidgets.QLabel('Fibonacci')
+        self.algo_1.setAlignment(QtCore.Qt.AlignLeft)
+        self.algo_1.setMinimumWidth(400)
 
-        layout.addWidget(self.widget_1)
-        layout.addWidget(self.label)
+        self.res_1 = QtWidgets.QLabel('Buy / Sell')
+        self.res_1.setAlignment(QtCore.Qt.AlignCenter)
+        self.res_1.setMaximumWidth(100)        
+        
+        self.algo_2 = QtWidgets.QLabel('X Buy Y Sell Z Neutral')
+        self.algo_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.algo_2.setMaximumHeight(50)
+
+        layout.addWidget(self.widget_1, 0, 0, 2, 1)
+        layout.addWidget(self.algo_1, 0, 1)
+        layout.addWidget(self.res_1, 0, 2)
+        layout.addWidget(self.algo_2, 1, 1, 1, 2) # row x/col x / high x / width x
         self.setLayout(layout)
 
 class Ethereum(QtWidgets.QWidget):
