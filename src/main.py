@@ -13,6 +13,8 @@ from enum import Enum
 from poloniex import Poloniex
 from PySide2 import QtGui, QtCore, QtWidgets
 
+import param_init
+
 import api_request.account
 import api_request.charts
 import api_request.trades
@@ -38,11 +40,11 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
 
-        self.poloniex_obj = widgets.login.log_UI()
+        param_init.init()
         self.tab = Tab.DASHBOARD
 
-        # self.currencies_json = data.currencies.currencies_json(self.poloniex_obj) #create a default list of currency (3)
-        # self.charts_json = data.charts.charts_json(self.poloniex_obj) #start if user choosed to
+        # self.currencies_json = data.currencies.currencies_json(poloniex_obj) #create a default list of currency (3)
+        # self.charts_json = data.charts.charts_json(poloniex_obj) #start if user choosed to
 
         self.setWindowTitle("CyptoBot")
         self.toolbar()
@@ -61,8 +63,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # using the timer for repetitiv actions
     def update(self):
-        self.widgets_update()
         if int(time.strftime("%S")) % 10 == 0:
+            self.widgets_update()
             # self.charts_json.get_data()
             # print(self.charts_json.print_data("data/json/charts.json", "high"))
             # self.currencies_json.print_data()

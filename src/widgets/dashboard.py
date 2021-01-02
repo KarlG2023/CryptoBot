@@ -25,8 +25,8 @@ class Dashboard(QtWidgets.QWidget):
         super(Dashboard, self).__init__(parent)
         self.layout = QtWidgets.QHBoxLayout()
 
-        self.label = QtWidgets.QLabel(time.strftime("%H:%M:%S "))
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label2 = QtWidgets.QLabel(time.strftime("%H:%M:%S "))
+        self.label2.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.layout.addWidget(self.label)
+        self.layout.addWidget(self.label2)
         self.setLayout(self.layout)

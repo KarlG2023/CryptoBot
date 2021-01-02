@@ -13,8 +13,11 @@ QListWidget::item:selected {
 
 QLabel {
     background-color: #FFFFFF;
-    qproperty-alignment: AlignCenter;
+    /* qproperty-alignment: AlignCenter; */
 }
+
+/* supress color (or let is as debug to see size of box) and put everything in widgets : code will be cleaner and easier for */
+/* the look of the app (example: putting a color on red or hiding widgets) */
 
 QPushButton {
     background-color: #2ABf9E;
