@@ -13,12 +13,12 @@ from enum import Enum
 from poloniex import Poloniex
 from PySide2 import QtGui, QtCore, QtWidgets
 
-import api_request.account
-import api_request.charts
-import api_request.trades
+import api_request.account #pylint: disable=import-error
+import api_request.charts #pylint: disable=import-error
+import api_request.trades #pylint: disable=import-error
 
-import data.charts
-import data.currencies
+import data.charts #pylint: disable=import-error
+import data.currencies #pylint: disable=import-error
 
 class Dashboard(QtWidgets.QWidget):
     def __init__(self, parent=None):
