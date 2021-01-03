@@ -12,15 +12,15 @@ QListWidget::item:selected {
 }
 
 QLabel {
-    background-color: #FFFFFF;
+    /* background-color: #FFFFFF; */
     /* qproperty-alignment: AlignCenter; */
 }
 
 /* supress color (or let is as debug to see size of box) and put everything in widgets : code will be cleaner and easier for */
 /* the look of the app (example: putting a color on buy or hiding widgets) */
 
-QPushButton {
+/* QPushButton {
     background-color: #2ABf9E;
     padding: 20px;
     font-size: 18px;
-}
+} */

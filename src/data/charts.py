@@ -14,32 +14,33 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
-import api_request.account
-import api_request.charts
-import api_request.trades
+import api_request.account #pylint: disable=import-error
+import api_request.charts #pylint: disable=import-error
+import api_request.trades #pylint: disable=import-error
 
 class charts_json:
     def __init__(self, poloniex):
         self.poloniex_obj = poloniex
-        self.data = str(api_request.charts.get_chart_data(self.poloniex_obj, ['USDT_BTC'], 900, start=int(time.time())-(86400*30), end=int(time.time()))).replace("'", '"')
-        self.data2 = self.data.replace("None", "null")
 
+        self.data_btc = self.init_data('USDT_BTC')
+        self.data_ltc = self.init_data('USDT_LTC')
+        self.data_eth = self.init_data('USDT_ETH')
 
     # putting a full month in json
-    def get_data(self):
+    def init_data(self, crypto):
         data = []
-        new_data = []
+        polo_data = str(api_request.charts.get_chart_data(self.poloniex_obj, [crypto], 900, start=int(time.time())-(86400*30), end=int(time.time()))).replace("'", '"').replace("None", "null")
         tmp = str()
         data_json = {}
         data_json['candle'] = []
 
-        for i in range(1, len(self.data2) - 1):
+        for i in range(1, len(polo_data) - 1):
             if i > 2:
-                if self.data2[i] == ',' and self.data2[i - 1] == '}':
+                if polo_data[i] == ',' and polo_data[i - 1] == '}':
                     data.append(tmp)
                     tmp = str()
                     i += 1
-            tmp += str(self.data2[i])
+            tmp += str(polo_data[i])
         for i in range(1, len(data)):
             new_tmp = {}
             data_row = []
@@ -59,14 +60,30 @@ class charts_json:
                 a = i.replace("'", "").split(':')
                 new_tmp[a[0]] = a[1]
             data_json['candle'].append(new_tmp)
-        
-        with open("data/json/charts.json", "w") as outfile:
-            json.dump(data_json, outfile)
+        return data_json
+        # with open("data/json/charts.json", "w") as outfile:
+        #     json.dump(data_json, outfile)
+
+
+    def get_data(self, data_json, element): # add x param to get last x element ?
+        res = []
+        for i in data_json["candle"]:
+            res.append(i[element])
+        return res
+    
+    def get_data_btc(self):
+        return self.data_btc
+    
+    def get_data_eth(self):
+        return self.data_eth
+    
+    def get_data_ltc(self):
+        return self.data_ltc
 
     # extract the json values from a given json
     # put path of the json to extract and select a element to extract
     # you will receive a list with every values for an element ask
-    def print_data(self, path, element):
+    def print_data_in_file(self, path, element):
         res = []
         with open(path) as json_file:
             data_json = json.load(json_file)

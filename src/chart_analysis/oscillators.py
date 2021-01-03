@@ -16,17 +16,17 @@ class ACTION(Enum):
 # The Relative Strength Index (RSI9 or RSI14) is a well versed momentum based oscillator which is used to measure the speed (velocity)
 # as well as the change (magnitude) of directional price movements. 
 
-def rsi_oscillator(json_data):
-    B = descending_average
-    H = ascending_average
-    rsi = 100 - (100 / 1 + (H / B))
-    if rsi < 30:
-        return ACTION.BUY
-    if rsi > 70:
-        return ACTION.SELL
-    if rsi > 30 and rsi < 70:
-        return ACTION.NEUTRAL
-    return ACTION.ERROR
+# def rsi_oscillator(json_data):
+#     B = descending_average
+#     H = ascending_average
+#     rsi = 100 - (100 / 1 + (H / B))
+#     if rsi < 30:
+#         return ACTION.BUY
+#     if rsi > 70:
+#         return ACTION.SELL
+#     if rsi > 30 and rsi < 70:
+#         return ACTION.NEUTRAL
+#     return ACTION.ERROR
 
 # L’oscillateur stochastique (14) est un indicateur momentum qui compare le cours de clôture le plus récent au range précédent sur une période donnée.
 # Contrairement à d’autres oscillateurs, il ne suit pas les cours ou le volume, mais la rapidité et le momentum du marché.
