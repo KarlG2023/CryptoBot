@@ -64,21 +64,22 @@ class charts_json:
         # with open("data/json/charts.json", "w") as outfile:
         #     json.dump(data_json, outfile)
 
-
+    # get an element in json
     def get_data(self, data_json, element): # add x param to get last x element ?
         res = []
         for i in data_json["candle"]:
             res.append(i[element])
         return res
     
-    def get_data_btc(self):
-        return self.data_btc
-    
-    def get_data_eth(self):
-        return self.data_eth
-    
-    def get_data_ltc(self):
-        return self.data_ltc
+    # return json asked by user
+    def get_json_data(self, pair):
+        if pair == "USDT_BTC":
+            return self.data_btc
+        if pair == "USDT_ETH":
+            return self.data_eth
+        if pair == "USDT_LTC":
+            return self.data_ltc
+        return "ERROR"
 
     # extract the json values from a given json
     # put path of the json to extract and select a element to extract

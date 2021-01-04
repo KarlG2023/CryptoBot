@@ -17,6 +17,7 @@ import api_request.account #pylint: disable=import-error
 import api_request.charts #pylint: disable=import-error
 import api_request.trades #pylint: disable=import-error
 
+import chart_analysis.analysis #pylint: disable=import-error
 import chart_analysis.oscillators #pylint: disable=import-error
 
 import data.charts #pylint: disable=import-error
@@ -33,28 +34,28 @@ def get_account_data(currency):
     return balance + last_trades
 
 def print_action(status):
-    if status == chart_analysis.oscillators.ACTION.BUY:
+    if status == chart_analysis.analysis.ACTION.BUY:
         res = QtWidgets.QLabel('Buy')
         res.setAlignment(QtCore.Qt.AlignCenter)
         res.setStyleSheet("background-color: #99e699;border-radius: 10px")
         res.setMaximumWidth(100)
         res.setMinimumHeight(20)
         return res
-    if status == chart_analysis.oscillators.ACTION.SELL:
+    if status == chart_analysis.analysis.ACTION.SELL:
         res = QtWidgets.QLabel('Sell')
         res.setAlignment(QtCore.Qt.AlignCenter)
         res.setStyleSheet("background-color: #ff8080;border-radius: 10px")
         res.setMaximumWidth(60)
         res.setMinimumHeight(20)
         return res
-    if status == chart_analysis.oscillators.ACTION.NEUTRAL:
+    if status == chart_analysis.analysis.ACTION.NEUTRAL:
         res = QtWidgets.QLabel('Neutral')
         res.setAlignment(QtCore.Qt.AlignCenter)
         res.setStyleSheet("background-color: #cccccc;border-radius: 10px")
         res.setMaximumWidth(100)
         res.setMinimumHeight(20)
         return res
-    if status == chart_analysis.oscillators.ACTION.ERROR:
+    if status == chart_analysis.analysis.ACTION.ERROR:
         res = QtWidgets.QLabel('Error')
         res.setAlignment(QtCore.Qt.AlignCenter)
         res.setStyleSheet("background-color: white;border-radius: 10px")
@@ -81,77 +82,77 @@ def get_data(layout, crypto):
     algo_1 = QtWidgets.QLabel('Relative Strength Index (14)')
     algo_1 = set_data_style(algo_1)
 
-    res_1 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_1 = print_action(chart_analysis.analysis.rsi_analysis("USDT_"+crypto)) 
 
     algo_2 = QtWidgets.QLabel('Stochastic (14,3,3)')
     algo_2 = set_data_style(algo_2)
 
-    res_2 = print_action(chart_analysis.oscillators.ACTION.SELL) #generic for now
+    res_2 = print_action(chart_analysis.analysis.ACTION.SELL) #generic for now
 
     algo_3 = QtWidgets.QLabel('Commodity Channel Index (20)')
     algo_3 = set_data_style(algo_3)
 
-    res_3 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_3 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_4 = QtWidgets.QLabel('Average Directional Index (14)')
     algo_4 = set_data_style(algo_4)
 
-    res_4 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_4 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_5 = QtWidgets.QLabel('Awesome Oscillator')
     algo_5 = set_data_style(algo_5)
 
-    res_5 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_5 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_6 = QtWidgets.QLabel('Momentum (10)')
     algo_6 = set_data_style(algo_6)
 
-    res_6 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_6 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_7 = QtWidgets.QLabel('MACD Level (12, 26)')
     algo_7 = set_data_style(algo_7)
 
-    res_7 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_7 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_8 = QtWidgets.QLabel('Stochastic RSI Fast (3, 3, 14, 14)')
     algo_8 = set_data_style(algo_8)
 
-    res_8 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_8 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_9 = QtWidgets.QLabel('Bull Bear Power')
     algo_9 = set_data_style(algo_9)
 
-    res_9 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_9 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_10 = QtWidgets.QLabel('Exponential Moving Average (5)')
     algo_10 = set_data_style(algo_10)
 
-    res_10 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_10 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_11 = QtWidgets.QLabel('Simple Moving Average (5)')
     algo_11 = set_data_style(algo_11)
 
-    res_11 = print_action(chart_analysis.oscillators.ACTION.NEUTRAL) #generic for now
+    res_11 = print_action(chart_analysis.analysis.ACTION.NEUTRAL) #generic for now
 
     algo_12 = QtWidgets.QLabel('Exponential Moving Average (10)')
     algo_12 = set_data_style(algo_12)
 
-    res_12 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_12 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_13 = QtWidgets.QLabel('Simple Moving Average (10)')
     algo_13 = set_data_style(algo_13)
 
-    res_13 = print_action(chart_analysis.oscillators.ACTION.SELL) #generic for now
+    res_13 = print_action(chart_analysis.analysis.ACTION.SELL) #generic for now
 
     algo_14 = QtWidgets.QLabel('Exponential Moving Average (20)')
     algo_14 = set_data_style(algo_14)
 
-    res_14 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_14 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     algo_15 = QtWidgets.QLabel('Simple Moving Average (20)')
     algo_15 = set_data_style(algo_15)
 
-    res_15 = print_action(chart_analysis.oscillators.ACTION.BUY) #generic for now
+    res_15 = print_action(chart_analysis.analysis.ACTION.BUY) #generic for now
 
     time_label = QtWidgets.QLabel(time.strftime("%H:%M:%S"))
     time_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
@@ -161,9 +162,9 @@ def get_data(layout, crypto):
     algo_global.setAlignment(QtCore.Qt.AlignCenter)
     algo_global.setMaximumHeight(50)
 
-    res_global = print_action(chart_analysis.oscillators.ACTION.BUY)
+    res_global = print_action(chart_analysis.analysis.ACTION.BUY)
 
-    print_action(chart_analysis.oscillators.ACTION.BUY)
+    print_action(chart_analysis.analysis.ACTION.BUY)
 
     layout.addWidget(widget_1, 0, 0, 15, 1)
 

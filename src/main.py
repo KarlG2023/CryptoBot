@@ -13,14 +13,16 @@ from enum import Enum
 from poloniex import Poloniex
 from PySide2 import QtGui, QtCore, QtWidgets
 
-import param_init
-
 import api_request.account
 import api_request.charts
 import api_request.trades
 
+import chart_analysis.analysis
+
 import data.charts
 import data.currencies
+
+import param_init
 
 import widgets.cryptos
 import widgets.dashboard
@@ -41,10 +43,12 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(parent)
 
         param_init.init()
+        param_init.init_json()
+        print(param_init.charts_json.get_json_data("USDT_LTC"))
         self.tab = Tab.DASHBOARD
 
         # self.currencies_json = data.currencies.currencies_json(poloniex_obj) #create a default list of currency (3)
-        self.charts_json = data.charts.charts_json(param_init.poloniex_obj)
+        ## self.charts_json = data.charts.charts_json(param_init.poloniex_obj)
 
         self.setWindowTitle("CyptoBot")
         self.toolbar()
@@ -64,9 +68,9 @@ class MainWindow(QtWidgets.QMainWindow):
     # using the timer for repetitiv actions
     def update(self):
         self.widgets_update()
-        if int(time.strftime("%M")) % 15 == 1 and int(time.strftime("%S")) == 5:
-            self.charts_json = data.charts.charts_json(param_init.poloniex_obj)
-            print(self.charts_json.get_data(self.charts_json.get_data_btc(), "high"))
+        if int(time.strftime("%M")) % 15 == 1 and int(time.strftime("%S")) == 0:
+            param_init.charts_json = data.charts.charts_json(param_init.poloniex_obj)
+            print(param_init.charts_json.get_json_data("USDT_LTC")) # 1609784100 39.72
             # self.currencies_json.print_data()
 
     # update widgets data
