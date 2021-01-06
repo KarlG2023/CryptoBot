@@ -19,17 +19,17 @@ import api_request.charts #pylint: disable=import-error
 import api_request.trades #pylint: disable=import-error
 
 class charts_json:
-    def __init__(self, poloniex):
+    def __init__(self, poloniex, candle_size):
         self.poloniex_obj = poloniex
 
-        self.data_btc = self.init_data('USDT_BTC')
-        self.data_ltc = self.init_data('USDT_LTC')
-        self.data_eth = self.init_data('USDT_ETH')
+        self.data_btc = self.init_data('USDT_BTC', candle_size)
+        self.data_ltc = self.init_data('USDT_LTC', candle_size)
+        self.data_eth = self.init_data('USDT_ETH', candle_size)
 
     # putting a full month in json
-    def init_data(self, crypto):
+    def init_data(self, crypto, candle_size):
         data = []
-        polo_data = str(api_request.charts.get_chart_data(self.poloniex_obj, [crypto], 900, start=int(time.time())-(86400*30), end=int(time.time()))).replace("'", '"').replace("None", "null")
+        polo_data = str(api_request.charts.get_chart_data(self.poloniex_obj, [crypto], candle_size, start=int(time.time())-(candle_size*30), end=int(time.time()))).replace("'", '"').replace("None", "null")
         tmp = str()
         data_json = {}
         data_json['candle'] = []
@@ -65,7 +65,7 @@ class charts_json:
         #     json.dump(data_json, outfile)
 
     # get an element in json
-    def get_data(self, data_json, element): # add x param to get last x element ?
+    def get_candle(self, data_json, element):
         res = []
         for i in data_json["candle"]:
             res.append(i[element])

@@ -21,5 +21,8 @@ class ACTION(Enum):
     ERROR = 4
 
 
-def rsi_analysis(pair):
+def rsi(pair):
     return chart_analysis.oscillators.rsi_oscillator(param_init.charts_json.get_json_data(pair))
+
+def stochastique(pair):
+    return chart_analysis.oscillators.stochastique_oscillator(param_init.charts_json.get_json_data(pair))

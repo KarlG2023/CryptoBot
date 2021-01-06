@@ -44,7 +44,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         param_init.init()
         param_init.init_json()
-        print(param_init.charts_json.get_json_data("USDT_LTC"))
+        # print(param_init.charts_json.get_json_data("USDT_LTC"))
         self.tab = Tab.DASHBOARD
 
         # self.currencies_json = data.currencies.currencies_json(poloniex_obj) #create a default list of currency (3)
@@ -68,13 +68,12 @@ class MainWindow(QtWidgets.QMainWindow):
     # using the timer for repetitiv actions
     def update(self):
         self.widgets_update()
-        if int(time.strftime("%M")) % 15 == 1 and int(time.strftime("%S")) == 0:
-            param_init.charts_json = data.charts.charts_json(param_init.poloniex_obj)
-            print(param_init.charts_json.get_json_data("USDT_LTC")) # 1609784100 39.72
-            # self.currencies_json.print_data()
+        if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+            param_init.charts_json = data.charts.charts_json(param_init.poloniex_obj, param_init.candle_size)
 
     # update widgets data
     def widgets_update(self):
+        self.central_widget.removeWidget(self.widget) # pas opti / créer tout les widgets et les updates en dehors du init
         if self.tab == Tab.PARAM:
             self.widget = widgets.parameters.Param(self)
         if self.tab == Tab.DASHBOARD:
