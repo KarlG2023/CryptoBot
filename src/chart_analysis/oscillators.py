@@ -16,13 +16,13 @@ import param_init #pylint: disable=import-error
 # as well as the change (magnitude) of directional price movements. 
 
 def rsi_oscillator(json_data):
+    candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
     B = 0
     H = 0
     nb_B = 0
     nb_H = 0
-    # print(json_data)
-    candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
-    for i in range(0, 13):
+
+    for i in range(0, 14):
         if float(param_init.charts_json.get_candle(json_data, "open")[candles-i]) > float(param_init.charts_json.get_candle(json_data, "close")[candles-i]):
             B += float(param_init.charts_json.get_candle(json_data, "open")[candles-i]) - float(param_init.charts_json.get_candle(json_data, "close")[candles-i])
             nb_B += 1
@@ -30,11 +30,14 @@ def rsi_oscillator(json_data):
             H += float(param_init.charts_json.get_candle(json_data, "close")[candles-i]) - float(param_init.charts_json.get_candle(json_data, "open")[candles-i])
             nb_H += 1
     B = B / nb_B
-    H = H / nb_H # open = high close = low ?
+    H = H / nb_H
+    print(B)
+    print(H)
     rsi = 100 - (100 / (1 + (H / B)))
 
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print(str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "   " + str(rsi))
+        print(str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "\n")
+        print("rsi_14    " + str(rsi))
 
     if rsi < 30:
         return chart_analysis.analysis.ACTION.BUY
@@ -59,14 +62,10 @@ def stochastique_oscillator(json_data):
         if highest_high < float(param_init.charts_json.get_candle(json_data, "high")[candles-i]):
             highest_high = float(param_init.charts_json.get_candle(json_data, "high")[candles-i])
 
-    # print(current_close)
-    # print(lowest_low)
-    # print(highest_high)
-
     stochastique = (100*(current_close - lowest_low)/(highest_high - lowest_low))
 
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("           " + str(stochastique))
+        print("stocha    " + str(stochastique))
 
     if stochastique < 20:
         return chart_analysis.analysis.ACTION.BUY
@@ -79,18 +78,69 @@ def stochastique_oscillator(json_data):
 # Assez proche de l'indicateur Stochastique, le Commodity Channel Index a un comportement particulièrement nerveux dans son
 # évolution et peut être rebutant à la première lecture tant les oscillations sont courtes dans leur période.
 
-# def cci_oscillator(json_data):
-#     for the_last_14_days:
-#         cours_m = (low + high + closure) / 3
-#     for the_last_14_days:
-#         cmm = 
-#     # ...
-#     # ...
+def cci_oscillator(json_data):
+    candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
+    tp = 0
+    current_tp = 0
+    standart_deviation = 0
+
+    for i in range(0, 19):
+        tl = float(param_init.charts_json.get_candle(json_data, "low")[candles-i])
+        th = float(param_init.charts_json.get_candle(json_data, "high")[candles-i])
+        tc = float(param_init.charts_json.get_candle(json_data, "close")[candles-i])
+        tp = tp + ((tl + th + tc) / 3)
+        if (i == 0):
+            current_tp = tp
+
+    sma = tp / 19
+
+    for i in range(0, 19):
+        tl =  float(param_init.charts_json.get_candle(json_data, "low")[candles-i])
+        th =  float(param_init.charts_json.get_candle(json_data, "high")[candles-i])
+        tc = float(param_init.charts_json.get_candle(json_data, "close")[candles-i])
+        tp = (tl + th + tc) / 3
+        standart_deviation = standart_deviation + abs(sma - tp)
+
+    standart_deviation = standart_deviation / 19
+    cci = (current_tp - sma) / (0.015 * standart_deviation)
     
-#     if cci < -100:
-#         return ACTION.BUY
-#     if cci > 100:
-#         return ACTION.SELL
-#     if cci > -100 and cci < 100:
-#         return ACTION.NEUTRAL
-#     return ACTION.ERROR
+    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+        print("cci_20    " + str(cci))
+    
+    if cci < -100:
+        return chart_analysis.analysis.ACTION.BUY
+    if cci > 100:
+        return chart_analysis.analysis.ACTION.SELL
+    if cci > -100 and cci < 100:
+        return chart_analysis.analysis.ACTION.NEUTRAL
+    return chart_analysis.analysis.ACTION.ERROR
+
+# ADX stands for Average Directional Movement Index and can be used to help measure the overall strength of a trend. 
+# The ADX indicator is an average of expanding price range values.
+
+# def average_directional_index(json_data):
+#     candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
+#     positiv_dm = 0.00
+#     negativ_dm = 0.00
+#     atr = 0
+
+#     for i in range(0, 14):
+#         positiv_dm = float(param_init.charts_json.get_candle(json_data, "high")[candles-i]) - float(param_init.charts_json.get_candle(json_data, "high")[candles-i-1])
+#         negativ_dm = float(param_init.charts_json.get_candle(json_data, "low")[candles-i-1]) - float(param_init.charts_json.get_candle(json_data, "low")[candles-i])
+#         tr = tr + abs(float(param_init.charts_json.get_candle(json_data, "high")[candles-i-1]) - float(param_init.charts_json.get_candle(json_data, "low")[candles-i-1]))
+
+#     atr = tr / 14
+
+
+#     adi = 0
+
+#     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+#         print("           " + str(adi))
+    
+#     if adi < 20:
+#         return chart_analysis.analysis.ACTION.BUY
+#     if adi > 25:
+#         return chart_analysis.analysis.ACTION.SELL
+#     if adi > 20 and adi < 25:
+#         return chart_analysis.analysis.ACTION.NEUTRAL
+#     return chart_analysis.analysis.ACTION.ERROR

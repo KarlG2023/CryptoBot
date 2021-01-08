@@ -92,7 +92,7 @@ def get_data(layout, crypto):
     algo_3 = QtWidgets.QLabel('Commodity Channel Index (20)')
     algo_3 = set_data_style(algo_3)
 
-    res_3 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_3 = print_action(chart_analysis.analysis.cci("USDT_"+crypto))
 
     algo_4 = QtWidgets.QLabel('Average Directional Index (14)')
     algo_4 = set_data_style(algo_4)
@@ -132,7 +132,7 @@ def get_data(layout, crypto):
     algo_11 = QtWidgets.QLabel('Simple Moving Average (5)')
     algo_11 = set_data_style(algo_11)
 
-    res_11 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_11 = print_action(chart_analysis.analysis.sma_5("USDT_"+crypto))
 
     algo_12 = QtWidgets.QLabel('Exponential Moving Average (10)')
     algo_12 = set_data_style(algo_12)
@@ -142,7 +142,7 @@ def get_data(layout, crypto):
     algo_13 = QtWidgets.QLabel('Simple Moving Average (10)')
     algo_13 = set_data_style(algo_13)
 
-    res_13 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_13 = print_action(chart_analysis.analysis.sma_10("USDT_"+crypto))
 
     algo_14 = QtWidgets.QLabel('Exponential Moving Average (20)')
     algo_14 = set_data_style(algo_14)
@@ -152,7 +152,7 @@ def get_data(layout, crypto):
     algo_15 = QtWidgets.QLabel('Simple Moving Average (20)')
     algo_15 = set_data_style(algo_15)
 
-    res_15 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_15 = print_action(chart_analysis.analysis.sma_20("USDT_"+crypto))
 
     time_label = QtWidgets.QLabel(time.strftime("%H:%M:%S"))
     time_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")

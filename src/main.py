@@ -44,7 +44,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         param_init.init()
         param_init.init_json()
-        # print(param_init.charts_json.get_json_data("USDT_LTC"))
+        
         self.tab = Tab.DASHBOARD
 
         # self.currencies_json = data.currencies.currencies_json(poloniex_obj) #create a default list of currency (3)
