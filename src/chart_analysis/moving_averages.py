@@ -16,7 +16,6 @@ import param_init #pylint: disable=import-error
 # as well as the change (magnitude) of directional price movements. 
 
 def sma_5(json_data):
-
     candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
     cp_sum = 0
 
@@ -37,7 +36,6 @@ def sma_5(json_data):
     return chart_analysis.analysis.ACTION.ERROR
 
 def sma_10(json_data):
-
     candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
     cp_sum = 0
 
@@ -59,7 +57,6 @@ def sma_10(json_data):
     return chart_analysis.analysis.ACTION.ERROR
 
 def sma_20(json_data):
-
     candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
     cp_sum = 0
 
@@ -77,5 +74,74 @@ def sma_20(json_data):
     if sma > 70:
         return chart_analysis.analysis.ACTION.SELL
     if sma > 30 and sma < 70:
+        return chart_analysis.analysis.ACTION.NEUTRAL
+    return chart_analysis.analysis.ACTION.ERROR
+
+def ema_5(json_data):
+    candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
+    cp_sum = 0
+    multiplier = (2 / (5 + 1))
+
+    for i in range(1, 6):
+        cp = float(param_init.charts_json.get_candle(json_data, "close")[candles-i])
+        cp_sum = cp_sum + cp
+    sma = cp_sum / 5
+
+    ema = (float(param_init.charts_json.get_candle(json_data, "close")[candles-1]) - sma) * multiplier + sma
+
+    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+        print("ema 5     " + str(ema))
+
+    if ema < 30:
+        return chart_analysis.analysis.ACTION.BUY
+    if ema > 70:
+        return chart_analysis.analysis.ACTION.SELL
+    if ema > 30 and ema < 70:
+        return chart_analysis.analysis.ACTION.NEUTRAL
+    return chart_analysis.analysis.ACTION.ERROR
+
+def ema_10(json_data):
+    candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
+    cp_sum = 0
+    multiplier = (2 / (11 + 1))
+
+    for i in range(1, 11):
+        cp = float(param_init.charts_json.get_candle(json_data, "close")[candles-i])
+        cp_sum = cp_sum + cp
+    sma = cp_sum / 10
+
+    ema = (float(param_init.charts_json.get_candle(json_data, "close")[candles-1]) - sma) * multiplier + sma
+
+    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+        print("ema 10    " + str(ema))
+
+    if ema < 30:
+        return chart_analysis.analysis.ACTION.BUY
+    if ema > 70:
+        return chart_analysis.analysis.ACTION.SELL
+    if ema > 30 and ema < 70:
+        return chart_analysis.analysis.ACTION.NEUTRAL
+    return chart_analysis.analysis.ACTION.ERROR
+
+def ema_20(json_data):
+    candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
+    cp_sum = 0
+    multiplier = (2 / (20 + 1))
+
+    for i in range(1, 21):
+        cp = float(param_init.charts_json.get_candle(json_data, "close")[candles-i])
+        cp_sum = cp_sum + cp
+    sma = cp_sum / 20
+
+    ema = (float(param_init.charts_json.get_candle(json_data, "close")[candles-1]) - sma) * multiplier + sma
+
+    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+        print("ema 20    " + str(ema))
+
+    if ema < 30:
+        return chart_analysis.analysis.ACTION.BUY
+    if ema > 70:
+        return chart_analysis.analysis.ACTION.SELL
+    if ema > 30 and ema < 70:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR

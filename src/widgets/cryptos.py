@@ -97,7 +97,7 @@ def get_data(layout, crypto):
     algo_4 = QtWidgets.QLabel('Average Directional Index (14)')
     algo_4 = set_data_style(algo_4)
 
-    res_4 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_4 = print_action(chart_analysis.analysis.adi("USDT_"+crypto))
 
     algo_5 = QtWidgets.QLabel('Awesome Oscillator')
     algo_5 = set_data_style(algo_5)
@@ -127,7 +127,7 @@ def get_data(layout, crypto):
     algo_10 = QtWidgets.QLabel('Exponential Moving Average (5)')
     algo_10 = set_data_style(algo_10)
 
-    res_10 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_10 = print_action(chart_analysis.analysis.ema_5("USDT_"+crypto))
 
     algo_11 = QtWidgets.QLabel('Simple Moving Average (5)')
     algo_11 = set_data_style(algo_11)
@@ -137,7 +137,7 @@ def get_data(layout, crypto):
     algo_12 = QtWidgets.QLabel('Exponential Moving Average (10)')
     algo_12 = set_data_style(algo_12)
 
-    res_12 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_12 = print_action(chart_analysis.analysis.ema_10("USDT_"+crypto))
 
     algo_13 = QtWidgets.QLabel('Simple Moving Average (10)')
     algo_13 = set_data_style(algo_13)
@@ -147,7 +147,7 @@ def get_data(layout, crypto):
     algo_14 = QtWidgets.QLabel('Exponential Moving Average (20)')
     algo_14 = set_data_style(algo_14)
 
-    res_14 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_14 = print_action(chart_analysis.analysis.ema_20("USDT_"+crypto))
 
     algo_15 = QtWidgets.QLabel('Simple Moving Average (20)')
     algo_15 = set_data_style(algo_15)

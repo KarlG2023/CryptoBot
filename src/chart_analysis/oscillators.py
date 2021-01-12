@@ -24,16 +24,14 @@ def rsi_oscillator(json_data):
 
     for i in range(0, 14):
         if float(param_init.charts_json.get_candle(json_data, "open")[candles-i]) > float(param_init.charts_json.get_candle(json_data, "close")[candles-i]):
-            B += float(param_init.charts_json.get_candle(json_data, "open")[candles-i]) - float(param_init.charts_json.get_candle(json_data, "close")[candles-i])
+            B -= float(param_init.charts_json.get_candle(json_data, "open")[candles-i]) / float(param_init.charts_json.get_candle(json_data, "close")[candles-i]) - 1
             nb_B += 1
         else:
-            H += float(param_init.charts_json.get_candle(json_data, "close")[candles-i]) - float(param_init.charts_json.get_candle(json_data, "open")[candles-i])
+            H += float(param_init.charts_json.get_candle(json_data, "close")[candles-i]) / float(param_init.charts_json.get_candle(json_data, "open")[candles-i]) - 1
             nb_H += 1
-    B = B / nb_B
-    H = H / nb_H
-    print(B)
-    print(H)
-    rsi = 100 - (100 / (1 + (H / B)))
+    B = B / 14
+    H = H / 14
+    rsi = 100 - (100 / (1 + (H / -B)))
 
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
         print(str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "\n")
@@ -118,29 +116,45 @@ def cci_oscillator(json_data):
 # ADX stands for Average Directional Movement Index and can be used to help measure the overall strength of a trend. 
 # The ADX indicator is an average of expanding price range values.
 
-# def average_directional_index(json_data):
-#     candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
-#     positiv_dm = 0.00
-#     negativ_dm = 0.00
-#     atr = 0
+def adi_oscillator(json_data):
+    candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
+    positiv_dm = 0.00
+    negativ_dm = 0.00
+    atr = 0
+    tr = 0
 
-#     for i in range(0, 14):
-#         positiv_dm = float(param_init.charts_json.get_candle(json_data, "high")[candles-i]) - float(param_init.charts_json.get_candle(json_data, "high")[candles-i-1])
-#         negativ_dm = float(param_init.charts_json.get_candle(json_data, "low")[candles-i-1]) - float(param_init.charts_json.get_candle(json_data, "low")[candles-i])
-#         tr = tr + abs(float(param_init.charts_json.get_candle(json_data, "high")[candles-i-1]) - float(param_init.charts_json.get_candle(json_data, "low")[candles-i-1]))
+    # https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx
+    # https://www.investopedia.com/terms/a/adx.asp
+    # first step need to start at 27th value and uses 14 values
+    # not sure about start value
 
-#     atr = tr / 14
+    # 
 
-
-#     adi = 0
-
-#     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-#         print("           " + str(adi))
+    for i in range(0, 13):
+        positiv_dm = float(param_init.charts_json.get_candle(json_data, "high")[candles+i-26]) - float(param_init.charts_json.get_candle(json_data, "high")[candles+i-1-26])
+        negativ_dm = float(param_init.charts_json.get_candle(json_data, "low")[candles+i-1-26]) - float(param_init.charts_json.get_candle(json_data, "low")[candles+i-26])
+        tr = tr + abs(float(param_init.charts_json.get_candle(json_data, "high")[candles+i-1-26]) - float(param_init.charts_json.get_candle(json_data, "low")[candles+i-1-26]))
+        
+        if (positiv_dm > negativ_dm):
+            print(positiv_dm)
+        if (negativ_dm > positiv_dm):
+            print(negativ_dm)
+        print("\n")
     
-#     if adi < 20:
-#         return chart_analysis.analysis.ACTION.BUY
-#     if adi > 25:
-#         return chart_analysis.analysis.ACTION.SELL
-#     if adi > 20 and adi < 25:
-#         return chart_analysis.analysis.ACTION.NEUTRAL
-#     return chart_analysis.analysis.ACTION.ERROR
+    print("ok\n")
+
+    atr = tr / 14
+
+
+    adi = atr
+
+    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+        print("adi       " + str(adi))
+    
+    if adi < 20:
+        return chart_analysis.analysis.ACTION.BUY
+    if adi > 25:
+        return chart_analysis.analysis.ACTION.SELL
+    if adi > 20 and adi < 25:
+        return chart_analysis.analysis.ACTION.NEUTRAL
+    return chart_analysis.analysis.ACTION.ERROR

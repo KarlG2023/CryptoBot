@@ -32,13 +32,25 @@ def stochastique(pair):
 def cci(pair):
     return chart_analysis.oscillators.cci_oscillator(param_init.charts_json.get_json_data(pair))
 
+def adi(pair):
+    return chart_analysis.oscillators.adi_oscillator(param_init.charts_json.get_json_data(pair))
+
 # moving_averages
 
 def sma_5(pair):
     return chart_analysis.moving_averages.sma_5(param_init.charts_json.get_json_data(pair))
 
+def ema_5(pair):
+    return chart_analysis.moving_averages.ema_5(param_init.charts_json.get_json_data(pair))
+
 def sma_10(pair):
     return chart_analysis.moving_averages.sma_10(param_init.charts_json.get_json_data(pair))
 
+def ema_10(pair):
+    return chart_analysis.moving_averages.ema_10(param_init.charts_json.get_json_data(pair))
+
 def sma_20(pair):
     return chart_analysis.moving_averages.sma_20(param_init.charts_json.get_json_data(pair))
+
+def ema_20(pair):
+    return chart_analysis.moving_averages.ema_20(param_init.charts_json.get_json_data(pair))
