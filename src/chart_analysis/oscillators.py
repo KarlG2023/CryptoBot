@@ -120,33 +120,64 @@ def adi_oscillator(json_data):
     candles = len(param_init.charts_json.get_candle(json_data, "volume"))-1
     positiv_dm = 0.00
     negativ_dm = 0.00
-    atr = 0
     tr = 0
+    POSITIV_DM14 = [0.00 for x in range(14)]
+    NEGATIV_DM14 = [0.00 for x in range(14)]
+    TR14 = [0.00 for x in range(14)]
+    DX = [0.00 for x in range(14)]
+    adi = 0
 
-    # https://school.stockcharts.com/doku.php?id=technical_indicators:average_directional_index_adx
-    # https://www.investopedia.com/terms/a/adx.asp
     # first step need to start at 27th value and uses 14 values
-    # not sure about start value
+    # smooth values by stocking previous adi on 5 values
 
-    # 
+    for i in range(0, 28):
+        cur_high_mclose = float(param_init.charts_json.get_candle(json_data, "high")[candles+i-28]) - float(param_init.charts_json.get_candle(json_data, "close")[candles+i-28])
+        cur_high_mpclose = abs(float(param_init.charts_json.get_candle(json_data, "high")[candles+i-28]) - float(param_init.charts_json.get_candle(json_data, "close")[candles+i+1-28]))
+        cur_low_mpclose = abs(float(param_init.charts_json.get_candle(json_data, "low")[candles+i-28]) - float(param_init.charts_json.get_candle(json_data, "close")[candles+i+1-28]))
 
-    for i in range(0, 13):
-        positiv_dm = float(param_init.charts_json.get_candle(json_data, "high")[candles+i-26]) - float(param_init.charts_json.get_candle(json_data, "high")[candles+i-1-26])
-        negativ_dm = float(param_init.charts_json.get_candle(json_data, "low")[candles+i-1-26]) - float(param_init.charts_json.get_candle(json_data, "low")[candles+i-26])
-        tr = tr + abs(float(param_init.charts_json.get_candle(json_data, "high")[candles+i-1-26]) - float(param_init.charts_json.get_candle(json_data, "low")[candles+i-1-26]))
+        # tr on 14 days
+        if cur_high_mclose > max(cur_high_mpclose, cur_low_mpclose):
+            TR14[i%14] = cur_high_mclose
+        if cur_high_mpclose > max(cur_high_mclose, cur_low_mpclose):
+            TR14[i%14] =  cur_high_mpclose
+        if cur_low_mpclose > max(cur_high_mclose, cur_high_mpclose):
+            TR14[i%14] =  cur_low_mpclose
+
+        chmph = float(param_init.charts_json.get_candle(json_data, "high")[candles+i-28]) - float(param_init.charts_json.get_candle(json_data, "high")[candles+i-1-28])
+        plmcl = float(param_init.charts_json.get_candle(json_data, "low")[candles+i-1-28]) - float(param_init.charts_json.get_candle(json_data, "low")[candles+i-28])
         
-        if (positiv_dm > negativ_dm):
-            print(positiv_dm)
-        if (negativ_dm > positiv_dm):
-            print(negativ_dm)
-        print("\n")
+        # positiv dm and negativ dm on 14 days
+        if (chmph > plmcl):
+            POSITIV_DM14[i%14] = chmph
+            # print(chmph)
+        if (plmcl > chmph):
+            NEGATIV_DM14[i%14] = plmcl
+        
+        if i > 14:
+            for a in range(0, len(TR14)):
+                tr += TR14[a]
     
-    print("ok\n")
+            for b in range(0, len(POSITIV_DM14)):
+                positiv_dm += POSITIV_DM14[b]
+        
+            for c in range(0, len(NEGATIV_DM14)):
+                negativ_dm += NEGATIV_DM14[c]
+            
+            pdi = (positiv_dm / tr)*100
+            ndi = (negativ_dm / tr)*100
 
-    atr = tr / 14
+            DX[i%14] = abs(pdi - ndi) / (pdi + ndi) * 100
 
+            tr = 0
+            positiv_dm = 0
+            negativ_dm = 0
 
-    adi = atr
+    for d in range(1, len(DX)):
+        adi += DX[d]
+        print(DX[d])
+    adi /= 14
+    print(adi)
+    print("\n\n\n")
 
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
         print("adi       " + str(adi))

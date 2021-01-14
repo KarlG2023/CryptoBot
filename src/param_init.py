@@ -9,5 +9,5 @@ def init():
 
 def init_json():
     global charts_json, candle_size
-    candle_size = 14400
+    candle_size = 900
     charts_json = data.charts.charts_json(poloniex_obj, candle_size)
