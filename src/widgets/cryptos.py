@@ -23,14 +23,14 @@ import chart_analysis.oscillators #pylint: disable=import-error
 import data.charts #pylint: disable=import-error
 import data.currencies #pylint: disable=import-error
 
-import param_init #pylint: disable=import-error
+import param #pylint: disable=import-error
 
 def get_account_data(currency):
-    balance = "Balance:\n" + str(api_request.account.get_balance(param_init.poloniex_obj)[currency]) + currency + "\n\n"
+    balance = "Balance:\n" + str(api_request.account.get_balance(param.poloniex_obj)[currency]) + currency + "\n\n"
     if currency == "BTC":
-        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param_init.poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
     else:
-        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param_init.poloniex_obj, "BTC_" + currency, start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param.poloniex_obj, "BTC_" + currency, start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
     return balance + last_trades
 
 def print_action(status):
@@ -102,27 +102,27 @@ def get_data(layout, crypto):
     algo_5 = QtWidgets.QLabel('Awesome Oscillator')
     algo_5 = set_data_style(algo_5)
 
-    res_5 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_5 = print_action(chart_analysis.analysis.awesome("USDT_"+crypto))
 
     algo_6 = QtWidgets.QLabel('Momentum (10)')
     algo_6 = set_data_style(algo_6)
 
-    res_6 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_6 = print_action(chart_analysis.analysis.momentum("USDT_"+crypto))
 
     algo_7 = QtWidgets.QLabel('MACD Level (12, 26)')
     algo_7 = set_data_style(algo_7)
 
-    res_7 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_7 = print_action(chart_analysis.analysis.macd("USDT_"+crypto))
 
     algo_8 = QtWidgets.QLabel('Stochastic RSI Fast (3, 3, 14, 14)')
     algo_8 = set_data_style(algo_8)
 
-    res_8 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_8 = print_action(chart_analysis.analysis.stoch_rsi("USDT_"+crypto))
 
     algo_9 = QtWidgets.QLabel('Bull Bear Power')
     algo_9 = set_data_style(algo_9)
 
-    res_9 = print_action(chart_analysis.analysis.ACTION.ERROR) #generic for now
+    res_9 = print_action(chart_analysis.analysis.bull_bear("USDT_"+crypto))
 
     algo_10 = QtWidgets.QLabel('Exponential Moving Average (5)')
     algo_10 = set_data_style(algo_10)

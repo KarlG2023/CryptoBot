@@ -22,7 +22,7 @@ import chart_analysis.analysis
 import data.charts
 import data.currencies
 
-import param_init
+import param
 
 import widgets.cryptos
 import widgets.dashboard
@@ -42,13 +42,13 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
 
-        param_init.init()
-        param_init.init_json()
+        param.init()
+        param.init_json()
         
         self.tab = Tab.DASHBOARD
 
         # self.currencies_json = data.currencies.currencies_json(poloniex_obj) #create a default list of currency (3)
-        ## self.charts_json = data.charts.charts_json(param_init.poloniex_obj)
+        ## self.charts_json = data.charts.charts_json(param.poloniex_obj)
 
         self.setWindowTitle("CyptoBot")
         self.toolbar()
@@ -68,8 +68,12 @@ class MainWindow(QtWidgets.QMainWindow):
     # using the timer for repetitiv actions
     def update(self):
         self.widgets_update()
+        # if int(time.strftime("%S")) % 5 == 0:
+        #     print(param.charts_json.get_candle(param.charts_json.data_btc, "close")[0])
+        #     print(param.charts_json.get_candle(param.charts_json.data_eth, "close")[0])
+        #     print(param.charts_json.get_candle(param.charts_json.data_ltc, "close")[0])
         if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-            param_init.charts_json = data.charts.charts_json(param_init.poloniex_obj, param_init.candle_size)
+            param.charts_json = data.charts.charts_json(param.poloniex_obj, param.candle_size)
 
     # update widgets data
     def widgets_update(self):

@@ -29,7 +29,7 @@ class charts_json:
     # putting a full month in json
     def init_data(self, crypto, candle_size):
         data = []
-        polo_data = str(api_request.charts.get_chart_data(self.poloniex_obj, [crypto], candle_size, start=int(time.time())-(candle_size*30), end=int(time.time()))).replace("'", '"').replace("None", "null")
+        polo_data = str(api_request.charts.get_chart_data(self.poloniex_obj, [crypto], candle_size, start=int(time.time())-(candle_size*35), end=int(time.time()))).replace("'", '"').replace("None", "null")
         tmp = str()
         data_json = {}
         data_json['candle'] = []
