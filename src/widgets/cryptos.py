@@ -82,7 +82,7 @@ def get_data(layout, crypto):
     algo_1 = QtWidgets.QLabel('Relative Strength Index (14)')
     algo_1 = set_data_style(algo_1)
 
-    res_1 = print_action(chart_analysis.analysis.rsi("USDT_"+crypto))
+    res_1 = print_action(param.cryptobot.get_rsi(crypto))
 
     algo_2 = QtWidgets.QLabel('Stochastic (14,3,3)')
     algo_2 = set_data_style(algo_2)
@@ -157,7 +157,7 @@ def get_data(layout, crypto):
     time_label = QtWidgets.QLabel(time.strftime("%H:%M:%S"))
     time_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
     
-    algo_global = QtWidgets.QLabel('X Buy Y Sell Z Neutral')
+    algo_global = QtWidgets.QLabel(param.cryptobot.get_status_string(crypto))
     algo_global.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
     algo_global.setAlignment(QtCore.Qt.AlignCenter)
     algo_global.setMaximumHeight(50)

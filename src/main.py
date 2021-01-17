@@ -44,11 +44,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         param.init()
         param.init_json()
+
+        param.cryptobot.btc_update()
+        param.cryptobot.eth_update()
+        param.cryptobot.ltc_update()
         
         self.tab = Tab.DASHBOARD
-
-        # self.currencies_json = data.currencies.currencies_json(poloniex_obj) #create a default list of currency (3)
-        ## self.charts_json = data.charts.charts_json(param.poloniex_obj)
 
         self.setWindowTitle("CyptoBot")
         self.toolbar()
@@ -68,11 +69,13 @@ class MainWindow(QtWidgets.QMainWindow):
     # using the timer for repetitiv actions
     def update(self):
         self.widgets_update()
-        # if int(time.strftime("%S")) % 5 == 0:
-        #     print(param.charts_json.get_candle(param.charts_json.data_btc, "close")[0])
-        #     print(param.charts_json.get_candle(param.charts_json.data_eth, "close")[0])
-        #     print(param.charts_json.get_candle(param.charts_json.data_ltc, "close")[0])
-        if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+        if int(time.strftime("%S")) == 0:
+            param.cryptobot.btc_update()
+        if int(time.strftime("%S")) == 20:
+            param.cryptobot.eth_update()
+        if int(time.strftime("%S")) == 40:
+            param.cryptobot.ltc_update()
+        if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 30:
             param.charts_json = data.charts.charts_json(param.poloniex_obj, param.candle_size)
 
     # update widgets data
