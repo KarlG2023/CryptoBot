@@ -33,9 +33,9 @@ def rsi_oscillator(json_data):
     H = H / 14
     rsi = 100 - (100 / (1 + (H / -B)))
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print(str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "\n")
-        print("rsi_14    " + str(rsi))
+#    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+#        print(str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "\n")
+#        print("rsi_14    " + str(rsi))
 
     if rsi < 30:
         return chart_analysis.analysis.ACTION.BUY
@@ -62,8 +62,8 @@ def stochastique_oscillator(json_data):
 
     stochastique = (100*(current_close - lowest_low)/(highest_high - lowest_low))
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("stocha    " + str(stochastique))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("stocha    " + str(stochastique))
 
     if stochastique < 20:
         return chart_analysis.analysis.ACTION.BUY
@@ -102,8 +102,8 @@ def cci_oscillator(json_data):
     standart_deviation = standart_deviation / 19
     cci = (current_tp - sma) / (0.015 * standart_deviation)
     
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("cci_20    " + str(cci))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("cci_20    " + str(cci))
     
     if cci < -100:
         return chart_analysis.analysis.ACTION.BUY
@@ -172,8 +172,8 @@ def adi_oscillator(json_data):
         adi += DX[d]
     adi /= 14
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("adi       " + str(adi))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("adi       " + str(adi))
     
     if adi < 20:
         return chart_analysis.analysis.ACTION.BUY
@@ -198,8 +198,8 @@ def AwesomeOscillatorSMA(json_data, nb):
 def AwesomeOscillator(json_data):
     AO = AwesomeOscillatorSMA(json_data, 5) - AwesomeOscillatorSMA(json_data, 34)
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("AO        " + str(AO))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("AO        " + str(AO))
 
     if AO < 0:
         return chart_analysis.analysis.ACTION.SELL
@@ -215,8 +215,8 @@ def momentum_oscillator(json_data):
 
     momentum = 100 * (float(param.charts_json.get_candle(json_data, "close")[candles]) / float(param.charts_json.get_candle(json_data, "close")[candles-10]))
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("MOMENTUM  " + str(momentum))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("MOMENTUM  " + str(momentum))
 
     if momentum < 80:
         return chart_analysis.analysis.ACTION.BUY
@@ -257,8 +257,8 @@ def macd_oscillator(json_data):
 
     macd_histogram = MACD_LINE_EMA[0] - signal_line
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("MACD      " + str(macd_histogram))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("MACD      " + str(macd_histogram))
 
     if macd_histogram < 0:
         return chart_analysis.analysis.ACTION.SELL
@@ -302,8 +302,8 @@ def stochastique_rsi(json_data):
     
     stoch_rsi = (rsi_past(json_data, 0) - low_rsi) / (high_rsi - low_rsi)
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("stochrsi  " + str(stoch_rsi))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("stochrsi  " + str(stoch_rsi))
 
     if stoch_rsi < 0.30:
         return chart_analysis.analysis.ACTION.BUY
@@ -335,8 +335,8 @@ def bull_bear_power(json_data):
 
     bull_bear = float(param.charts_json.get_candle(json_data, "low")[candles]) - ema_13(json_data)
 
-    if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("bullbear  " + str(bull_bear))
+    # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
+    #     print("bullbear  " + str(bull_bear))
 
     if bull_bear < 0:
         return chart_analysis.analysis.ACTION.BUY

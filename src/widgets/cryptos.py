@@ -87,72 +87,72 @@ def get_data(layout, crypto):
     algo_2 = QtWidgets.QLabel('Stochastic (14,3,3)')
     algo_2 = set_data_style(algo_2)
 
-    res_2 = print_action(chart_analysis.analysis.stochastique("USDT_"+crypto))
+    res_2 = print_action(param.cryptobot.get_stochastique(crypto))
 
     algo_3 = QtWidgets.QLabel('Commodity Channel Index (20)')
     algo_3 = set_data_style(algo_3)
 
-    res_3 = print_action(chart_analysis.analysis.cci("USDT_"+crypto))
+    res_3 = print_action(param.cryptobot.get_cci(crypto))
 
     algo_4 = QtWidgets.QLabel('Average Directional Index (14)')
     algo_4 = set_data_style(algo_4)
 
-    res_4 = print_action(chart_analysis.analysis.adi("USDT_"+crypto))
+    res_4 = print_action(param.cryptobot.get_adi(crypto))
 
     algo_5 = QtWidgets.QLabel('Awesome Oscillator')
     algo_5 = set_data_style(algo_5)
 
-    res_5 = print_action(chart_analysis.analysis.awesome("USDT_"+crypto))
+    res_5 = print_action(param.cryptobot.get_awesome(crypto))
 
     algo_6 = QtWidgets.QLabel('Momentum (10)')
     algo_6 = set_data_style(algo_6)
 
-    res_6 = print_action(chart_analysis.analysis.momentum("USDT_"+crypto))
+    res_6 = print_action(param.cryptobot.get_momentum(crypto))
 
     algo_7 = QtWidgets.QLabel('MACD Level (12, 26)')
     algo_7 = set_data_style(algo_7)
 
-    res_7 = print_action(chart_analysis.analysis.macd("USDT_"+crypto))
+    res_7 = print_action(param.cryptobot.get_macd(crypto))
 
     algo_8 = QtWidgets.QLabel('Stochastic RSI Fast (3, 3, 14, 14)')
     algo_8 = set_data_style(algo_8)
 
-    res_8 = print_action(chart_analysis.analysis.stoch_rsi("USDT_"+crypto))
+    res_8 = print_action(param.cryptobot.get_stochrsi(crypto))
 
     algo_9 = QtWidgets.QLabel('Bull Bear Power')
     algo_9 = set_data_style(algo_9)
 
-    res_9 = print_action(chart_analysis.analysis.bull_bear("USDT_"+crypto))
+    res_9 = print_action(param.cryptobot.get_bullbear(crypto))
 
     algo_10 = QtWidgets.QLabel('Exponential Moving Average (5)')
     algo_10 = set_data_style(algo_10)
 
-    res_10 = print_action(chart_analysis.analysis.ema_5("USDT_"+crypto))
+    res_10 = print_action(param.cryptobot.get_ema5(crypto))
 
     algo_11 = QtWidgets.QLabel('Simple Moving Average (5)')
     algo_11 = set_data_style(algo_11)
 
-    res_11 = print_action(chart_analysis.analysis.sma_5("USDT_"+crypto))
+    res_11 = print_action(param.cryptobot.get_sma5(crypto))
 
     algo_12 = QtWidgets.QLabel('Exponential Moving Average (10)')
     algo_12 = set_data_style(algo_12)
 
-    res_12 = print_action(chart_analysis.analysis.ema_10("USDT_"+crypto))
+    res_12 = print_action(param.cryptobot.get_ema10(crypto))
 
     algo_13 = QtWidgets.QLabel('Simple Moving Average (10)')
     algo_13 = set_data_style(algo_13)
 
-    res_13 = print_action(chart_analysis.analysis.sma_10("USDT_"+crypto))
+    res_13 = print_action(param.cryptobot.get_sma10(crypto))
 
     algo_14 = QtWidgets.QLabel('Exponential Moving Average (20)')
     algo_14 = set_data_style(algo_14)
 
-    res_14 = print_action(chart_analysis.analysis.ema_20("USDT_"+crypto))
+    res_14 = print_action(param.cryptobot.get_ema20(crypto))
 
     algo_15 = QtWidgets.QLabel('Simple Moving Average (20)')
     algo_15 = set_data_style(algo_15)
 
-    res_15 = print_action(chart_analysis.analysis.sma_20("USDT_"+crypto))
+    res_15 = print_action(param.cryptobot.get_sma20(crypto))
 
     time_label = QtWidgets.QLabel(time.strftime("%H:%M:%S"))
     time_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
@@ -162,9 +162,9 @@ def get_data(layout, crypto):
     algo_global.setAlignment(QtCore.Qt.AlignCenter)
     algo_global.setMaximumHeight(50)
 
-    res_global = print_action(chart_analysis.analysis.ACTION.ERROR)
+    res_global = print_action(param.cryptobot.get_status(crypto))
 
-    print_action(chart_analysis.analysis.ACTION.BUY)
+    # print_action(chart_analysis.analysis.ACTION.BUY)
 
     layout.addWidget(widget_1, 0, 0, 15, 1)
 

@@ -20,11 +20,17 @@ import api_request.trades #pylint: disable=import-error
 import data.charts #pylint: disable=import-error
 import data.currencies #pylint: disable=import-error
 
+import param #pylint: disable=import-error
+
 class Param(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(Param, self).__init__(parent)
 
         layout = QtWidgets.QHBoxLayout()
+
+        self.candle_label = QtWidgets.QLabel("Choose a candle length:")
+        layout.addWidget(self.candle_label)
+
         self.b1 = QtWidgets.QCheckBox("900")
         self.b1.setChecked(True)
         self.b1.stateChanged.connect(lambda:self.btnstate(self.b1))

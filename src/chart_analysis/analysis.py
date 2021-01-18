@@ -236,7 +236,7 @@ class analysis:
             self.nbr_neutral_ltc = 0
             self.nbr_sell_ltc = 0
     
-    # finish all get
+    # Function to access the status for each algorythm
 
     def get_rsi(self, crypto):
         if crypto == "BTC":
@@ -246,15 +246,140 @@ class analysis:
         if crypto == "LTC":  
             return self.rsi_ltc
     
-    # dont forget the get for the green buy / red sell / white neutral
+    def get_stochastique(self, crypto):
+        if crypto == "BTC":
+            return self.stochastique_btc
+        if crypto == "ETH":     
+            return self.stochastique_eth
+        if crypto == "LTC":  
+            return self.stochastique_ltc
+    
+    def get_cci(self, crypto):
+        if crypto == "BTC":
+            return self.cci_btc
+        if crypto == "ETH":     
+            return self.cci_eth
+        if crypto == "LTC":  
+            return self.cci_ltc
+    
+    def get_adi(self, crypto):
+        if crypto == "BTC":
+            return self.adi_btc
+        if crypto == "ETH":     
+            return self.adi_eth
+        if crypto == "LTC":  
+            return self.adi_ltc
+    
+    def get_awesome(self, crypto):
+        if crypto == "BTC":
+            return self.awesome_btc
+        if crypto == "ETH":     
+            return self.awesome_eth
+        if crypto == "LTC":  
+            return self.awesome_ltc
+    
+    def get_momentum(self, crypto):
+        if crypto == "BTC":
+            return self.momentum_btc
+        if crypto == "ETH":     
+            return self.momentum_eth
+        if crypto == "LTC":  
+            return self.momentum_eth
+    
+    def get_macd(self, crypto):
+        if crypto == "BTC":
+            return self.macd_btc
+        if crypto == "ETH":     
+            return self.macd_eth
+        if crypto == "LTC":  
+            return self.macd_ltc
+    
+    def get_stochrsi(self, crypto):
+        if crypto == "BTC":
+            return self.stoch_rsi_btc
+        if crypto == "ETH":     
+            return self.stoch_rsi_eth
+        if crypto == "LTC":  
+            return self.stoch_rsi_ltc
+
+    def get_bullbear(self, crypto):
+        if crypto == "BTC":
+            return self.bull_bear_btc
+        if crypto == "ETH":     
+            return self.bull_bear_eth
+        if crypto == "LTC":  
+            return self.bull_bear_ltc
+    
+    def get_sma5(self, crypto):
+        if crypto == "BTC":
+            return self.sma_5_btc
+        if crypto == "ETH":     
+            return self.sma_5_eth
+        if crypto == "LTC":  
+            return self.sma_5_ltc
+    
+    def get_sma10(self, crypto):
+        if crypto == "BTC":
+            return self.sma_10_btc
+        if crypto == "ETH":     
+            return self.sma_10_eth
+        if crypto == "LTC":  
+            return self.sma_10_ltc
+    
+    def get_sma20(self, crypto):
+        if crypto == "BTC":
+            return self.sma_20_btc
+        if crypto == "ETH":     
+            return self.sma_20_eth
+        if crypto == "LTC":  
+            return self.sma_20_ltc
+    
+    def get_ema5(self, crypto):
+        if crypto == "BTC":
+            return self.ema_5_btc
+        if crypto == "ETH":     
+            return self.ema_5_eth
+        if crypto == "LTC":  
+            return self.ema_5_ltc
+    
+    def get_ema10(self, crypto):
+        if crypto == "BTC":
+            return self.ema_10_btc
+        if crypto == "ETH":     
+            return self.ema_10_eth
+        if crypto == "LTC":  
+            return self.ema_10_ltc
+    
+    def get_ema20(self, crypto):
+        if crypto == "BTC":
+            return self.ema_20_btc
+        if crypto == "ETH":     
+            return self.ema_20_eth
+        if crypto == "LTC":  
+            return self.ema_20_ltc
+    
+    # Recovers the cryptobot decision regarding a given crypto
 
     def get_status(self, crypto):
-        return 0
-
-    # dont forget the get for the result, buy/ sell ?
-
-    def get_result(self, crypto):
-        return 0
+        if crypto == "BTC":
+            if (self.nbr_buy_btc > self.nbr_sell_btc + self.nbr_neutral_btc):
+                return ACTION.BUY
+            if (self.nbr_sell_btc > self.nbr_buy_btc + self.nbr_neutral_btc):
+                return ACTION.SELL
+            return ACTION.NEUTRAL
+        if crypto == "ETH":     
+            if (self.nbr_buy_eth > self.nbr_sell_eth + self.nbr_neutral_eth):
+                return ACTION.BUY
+            if (self.nbr_sell_eth > self.nbr_buy_eth + self.nbr_neutral_eth):
+                return ACTION.SELL
+            return ACTION.NEUTRAL
+        if crypto == "LTC":  
+            if (self.nbr_buy_ltc > self.nbr_sell_ltc + self.nbr_neutral_ltc):
+                return ACTION.BUY
+            if (self.nbr_sell_ltc > self.nbr_buy_ltc + self.nbr_neutral_ltc):
+                return ACTION.SELL
+            return ACTION.NEUTRAL
+        return ACTION.ERROR
     
     def get_status_string(self, crypto):
         if crypto == "BTC":

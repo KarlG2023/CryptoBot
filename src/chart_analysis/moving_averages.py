@@ -25,7 +25,7 @@ def sma_5(json_data):
     sma = cp_sum / 5
 
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-        print("sma 5     " + str(sma))
+        print("\nsma 5     " + str(sma))
 
     if sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005:
         return chart_analysis.analysis.ACTION.BUY
@@ -92,11 +92,11 @@ def ema_5(json_data):
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
         print("ema 5     " + str(ema))
 
-    if sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005:
+    if ema < float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005:
         return chart_analysis.analysis.ACTION.BUY
-    if sma > float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005:
+    if ema > float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005:
         return chart_analysis.analysis.ACTION.SELL
-    if sma > float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005 and sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005:
+    if ema > float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005 and sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.005:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 
@@ -115,11 +115,11 @@ def ema_10(json_data):
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
         print("ema 10    " + str(ema))
 
-    if sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01:
+    if ema < float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01:
         return chart_analysis.analysis.ACTION.BUY
-    if sma > float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01:
+    if ema > float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01:
         return chart_analysis.analysis.ACTION.SELL
-    if sma > float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01 and sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01:
+    if ema > float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01 and sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.01:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 
@@ -138,10 +138,10 @@ def ema_20(json_data):
     if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
         print("ema 20    " + str(ema))
 
-    if sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02:
+    if ema < float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02:
         return chart_analysis.analysis.ACTION.BUY
-    if sma > float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02:
+    if ema > float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02:
         return chart_analysis.analysis.ACTION.SELL
-    if sma > float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02 and sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02:
+    if ema > float(param.charts_json.get_candle(json_data, "close")[candles-i]) - float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02 and sma < float(param.charts_json.get_candle(json_data, "close")[candles-i]) + float(param.charts_json.get_candle(json_data, "close")[candles-i])*0.02:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
