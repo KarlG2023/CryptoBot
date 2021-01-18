@@ -64,7 +64,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def time(self):
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.update)
-        self.timer.start(1000)
+        self.timer.start(500)
 
     # using the timer for repetitiv actions
     def update(self):
