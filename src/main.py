@@ -68,6 +68,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # using the timer for repetitiv actions
     def update(self):
+        self.setFixedSize(param.window_x, param.window_y)
         self.widgets_update()
         if int(time.strftime("%S")) == 0:
             param.cryptobot.btc_update()
@@ -166,6 +167,6 @@ if __name__ == '__main__':
         _style = f.read()
         app.setStyleSheet(_style)
     dashboard = MainWindow()
-    dashboard.resize(1280, 720)
+    dashboard.resize(param.window_x, param.window_y)
     dashboard.show()
     app.exec_()

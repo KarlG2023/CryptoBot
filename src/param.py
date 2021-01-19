@@ -5,8 +5,10 @@ import data.charts
 import widgets.login
 
 def init():
-    global poloniex_obj
+    global poloniex_obj, window_x, window_y
     poloniex_obj = widgets.login.log_UI()
+    window_x = 1280
+    window_y = 720
 
 def init_json():
     global charts_json, candle_size, cryptobot
