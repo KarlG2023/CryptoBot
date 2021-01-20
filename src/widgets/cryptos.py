@@ -26,11 +26,13 @@ import data.currencies #pylint: disable=import-error
 import param #pylint: disable=import-error
 
 def get_account_data(currency):
-    balance = "Balance:\n" + str(api_request.account.get_balance(param.poloniex_obj)[currency]) + currency + "\n\n"
+    balance = "Balance:\n" + str(param.balance[currency]) + " " + currency + "\n\n"
     if currency == "BTC":
-        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
-    else:
-        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param.poloniex_obj, "BTC_" + currency, start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+        last_trades = "Previous trades order:\n" + param.trades_btc
+    if currency == "ETH":
+        last_trades = "Previous trades order:\n" + param.trades_eth
+    if currency == "LTC":
+        last_trades = "Previous trades order:\n" + param.trades_ltc
     return balance + last_trades
 
 def print_action(status):

@@ -25,11 +25,15 @@ import data.currencies #pylint: disable=import-error
 import param #pylint: disable=import-error
 
 def get_account_data(currency):
-    balance = "Balance:\n" + str(api_request.account.get_balance(param.poloniex_obj)[currency]) + currency + "\n\n"
+    last_trades = ""
+    balance = "Balance:\n" + str(param.balance[currency]) + " " + currency + "\n\n"
+
     if currency == "BTC":
-        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
-    else:
-        last_trades= "Previous trades order:\n" + str(api_request.trades.getTradeHistory(param.poloniex_obj, "BTC_" + currency, start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+        last_trades = "Previous trades order:\n" + param.trades_btc
+    if currency == "ETH":
+        last_trades = "Previous trades order:\n" + param.trades_eth
+    if currency == "LTC":
+        last_trades = "Previous trades order:\n" + param.trades_ltc
     return balance + last_trades
 
 def print_action(status):
@@ -70,13 +74,14 @@ def set_data_style(label):
 
 def get_data(layout):
 
+    widget_1_content = get_account_data("USDT")
     widget_2_content = get_account_data("BTC")
     widget_3_content = get_account_data("ETH")
     widget_4_content = get_account_data("LTC")
 
     layout = QtWidgets.QGridLayout()
 
-    widget_1 = QtWidgets.QLabel("Balance:")
+    widget_1 = QtWidgets.QLabel(widget_1_content)
     widget_1.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
     widget_1.setAlignment(QtCore.Qt.AlignLeft)
     # widget_1.setFixedWidth(250)
