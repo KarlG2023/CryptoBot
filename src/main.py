@@ -72,7 +72,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setFixedSize(param.window_x, param.window_y)
         self.widgets_update()
         if int(time.strftime("%S")) == 0:
-            param.balance = api_request.account.get_balance(param.poloniex_obj)
+            # param.balance = api_request.account.get_balance(param.poloniex_obj) # comment for test phase
+            print(param.balance)
         if int(time.strftime("%S")) == 30:
             param.charts_json = data.charts.charts_json(param.poloniex_obj, param.candle_size)
         if int(time.strftime("%S")) == 40:
@@ -87,7 +88,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # update widgets data
     def widgets_update(self):
-        self.central_widget.removeWidget(self.widget) # pas opti / créer tout les widgets et les updates en dehors du init
+        self.central_widget.removeWidget(self.widget)
         if self.tab == Tab.PARAM:
             self.widget = widgets.parameters.Param(self)
         if self.tab == Tab.DASHBOARD:

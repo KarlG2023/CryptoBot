@@ -7,7 +7,7 @@ import string
 from poloniex import Poloniex
 from PySide2 import QtGui, QtCore, QtWidgets
 
-import api_request.account
+import api_request.account #pylint: disable=import-error
 
 def getCredentials():
     key, ok = QtWidgets.QInputDialog.getText(None, "Enter your credentials", "Api Key?", QtWidgets.QLineEdit.Password)

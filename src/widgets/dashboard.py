@@ -104,10 +104,29 @@ def get_data(layout):
     time_label = QtWidgets.QLabel(time.strftime("%H:%M:%S"))
     time_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
     
-    algo_global = QtWidgets.QLabel("START")
-    algo_global.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
-    algo_global.setAlignment(QtCore.Qt.AlignCenter)
-    algo_global.setMaximumHeight(50)
+    if param.bot_status == 0:
+        bot_status = QtWidgets.QPushButton("START")
+        bot_status.setStyleSheet("QPushButton { background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px; }"
+                                 "QPushButton:pressed { background-color: #cccccc; border-color: #737373 }")
+        bot_status.setMaximumHeight(50)
+        bot_status.clicked.connect(change_status) 
+    else:
+        bot_status = QtWidgets.QPushButton("STOP")
+        bot_status.setStyleSheet("QPushButton { background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px; }"
+                                 "QPushButton:pressed { background-color: #cccccc; border-color: #737373 }")
+        bot_status.setMaximumHeight(50)
+        bot_status.clicked.connect(change_status) 
+
+    if param.server_status == 0:
+        server_status = QtWidgets.QLabel("Offline")
+        server_status.setStyleSheet("background-color: #ff8080;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
+        server_status.setAlignment(QtCore.Qt.AlignCenter)
+        layout.addWidget(server_status, 15, 3)
+    else:
+        server_status = QtWidgets.QLabel("Online")
+        server_status.setStyleSheet("background-color: #99e699;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
+        server_status.setAlignment(QtCore.Qt.AlignCenter)
+        layout.addWidget(server_status, 15, 3)
 
     layout.addWidget(widget_1, 0, 0, 15, 1)
     layout.addWidget(widget_2, 0, 1, 15, 1)
@@ -115,8 +134,16 @@ def get_data(layout):
     layout.addWidget(widget_4, 0, 3, 15, 1)
 
     layout.addWidget(time_label, 15, 0)
-    layout.addWidget(algo_global, 15, 1, 1, 3) # row x/col x / high x / width x
+    layout.addWidget(bot_status, 15, 1, 1, 2) # row x/col x / high x / width x
     return layout
+
+def change_status():
+    if param.bot_status == 0:
+        param.bot_status = 1
+        print("start")
+    else:
+        param.bot_status = 0
+        print("stop")
 
 class Dashboard(QtWidgets.QWidget):
     def __init__(self, parent=None):

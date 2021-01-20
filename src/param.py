@@ -11,14 +11,21 @@ import data.charts
 import widgets.login
 
 def init():
-    global poloniex_obj, window_x, window_y
+    global poloniex_obj, bot_status, server_status, window_x, window_y
     poloniex_obj = widgets.login.log_UI()
+    bot_status = 0
+    server_status = 1
     window_x = 1280
     window_y = 720
 
+
 def init_account():
     global balance, trades_btc, trades_eth, trades_ltc
-    balance = api_request.account.get_balance(poloniex_obj)
+
+    # balance = api_request.account.get_balance(poloniex_obj)
+    balance = {'USDT': 1000.0, 'BTC': 0.0, 'ETH': 0.0, 'LTC': 0.0} # test
+
+
     trades_btc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
     trades_eth = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
     trades_ltc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
