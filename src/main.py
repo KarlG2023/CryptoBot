@@ -71,9 +71,58 @@ class MainWindow(QtWidgets.QMainWindow):
     def update(self):
         self.setFixedSize(param.window_x, param.window_y)
         self.widgets_update()
-        if int(time.strftime("%S")) == 0:
-            # param.balance = api_request.account.get_balance(param.poloniex_obj) # comment for test phase
-            print(param.balance)
+        # if int(time.strftime("%S")) == 0:
+        #     # param.balance = api_request.account.get_balance(param.poloniex_obj) # comment for test phase
+        #     print("Balance: " + str(param.balance))
+        if int(time.strftime("%S")) == 10:
+            if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY:
+                #Make conversion here
+                price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
+                param.balance['BTC'] = (price / param.balance['USDT'])/100
+                param.balance['USDT'] = 0
+                print("BOUGHT BTC at " + str(price))
+                print("Balance: " + str(param.balance))
+            
+            if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.SELL and param.balance['BTC'] != 0:
+                #Make conversion here
+                price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
+                param.balance['USDT'] = price * param.balance['BTC']
+                param.balance['BTC'] = 0
+                print("SOLD BTC at " + str(price))
+                print("Balance: " + str(param.balance))
+
+            if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY:
+                #Make conversion here
+                price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
+                param.balance['ETH'] = (price / param.balance['USDT'])/100
+                param.balance['USDT'] = 0
+                print("BOUGHT ETH at " + str(price))
+                print("Balance: " + str(param.balance))
+
+            if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.SELL and param.balance['ETH'] != 0:
+                #Make conversion here
+                price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
+                param.balance['USDT'] = price * param.balance['ETH']
+                param.balance['ETH'] = 0
+                print("SOLD ETH at " + str(price))
+                print("Balance: " + str(param.balance))
+
+            if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY:
+                #Make conversion here
+                price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
+                param.balance['LTC'] = (price / param.balance['USDT'])/100
+                param.balance['USDT'] = 0
+                print("BOUGHT LTC at " + str(price))
+                print("Balance: " + str(param.balance))
+
+            if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.SELL and param.balance['LTC'] != 0:
+                #Make conversion here
+                price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
+                param.balance['USDT'] = price * param.balance['LTC']
+                param.balance['LTC'] = 0
+                print("SOLD LTC at " + str(price))
+                print("Balance: " + str(param.balance))
+            
         if int(time.strftime("%S")) == 30:
             param.charts_json = data.charts.charts_json(param.poloniex_obj, param.candle_size)
         if int(time.strftime("%S")) == 40:
