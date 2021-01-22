@@ -170,36 +170,51 @@ def get_data(layout, crypto):
 
     layout.addWidget(widget_1, 0, 0, 15, 1)
 
-    layout.addWidget(algo_1, 0, 1)
-    layout.addWidget(res_1, 0, 2)
-    layout.addWidget(algo_2, 1, 1)
-    layout.addWidget(res_2, 1, 2)
-    layout.addWidget(algo_3, 2, 1)
-    layout.addWidget(res_3, 2, 2)
-    layout.addWidget(algo_4, 3, 1)
-    layout.addWidget(res_4, 3, 2)
-    layout.addWidget(algo_5, 4, 1)
-    layout.addWidget(res_5, 4, 2)
-    layout.addWidget(algo_6, 5, 1)
-    layout.addWidget(res_6, 5, 2)
-    layout.addWidget(algo_7, 6, 1)
-    layout.addWidget(res_7, 6, 2)
-    layout.addWidget(algo_8, 7, 1)
-    layout.addWidget(res_8, 7, 2)
-    layout.addWidget(algo_9, 8, 1)
-    layout.addWidget(res_9, 8, 2)
-    layout.addWidget(algo_10, 9, 1)
-    layout.addWidget(res_10, 9, 2)
-    layout.addWidget(algo_11, 10, 1)
-    layout.addWidget(res_11, 10, 2)
-    layout.addWidget(algo_12, 11, 1)
-    layout.addWidget(res_12, 11, 2)
-    layout.addWidget(algo_13, 12, 1)
-    layout.addWidget(res_13, 12, 2)
-    layout.addWidget(algo_14, 13, 1)
-    layout.addWidget(res_14, 13, 2)
-    layout.addWidget(algo_15, 14, 1)
-    layout.addWidget(res_15, 14, 2)
+    if param.rsi != 0:
+        layout.addWidget(algo_1, 0, 1)
+        layout.addWidget(res_1, 0, 2)
+    if param.stochastique != 0:
+        layout.addWidget(algo_2, 1, 1)
+        layout.addWidget(res_2, 1, 2)
+    if param.cci != 0:
+        layout.addWidget(algo_3, 2, 1)
+        layout.addWidget(res_3, 2, 2)
+    if param.adi != 0:
+        layout.addWidget(algo_4, 3, 1)
+        layout.addWidget(res_4, 3, 2)
+    if param.awesome != 0:
+        layout.addWidget(algo_5, 4, 1)
+        layout.addWidget(res_5, 4, 2)
+    if param.momentum != 0:
+        layout.addWidget(algo_6, 5, 1)
+        layout.addWidget(res_6, 5, 2)
+    if param.macd != 0:
+        layout.addWidget(algo_7, 6, 1)
+        layout.addWidget(res_7, 6, 2)
+    if param.stochrsi != 0:
+        layout.addWidget(algo_8, 7, 1)
+        layout.addWidget(res_8, 7, 2)
+    if param.bullbear != 0:
+        layout.addWidget(algo_9, 8, 1)
+        layout.addWidget(res_9, 8, 2)
+    if param.sma5 != 0:
+        layout.addWidget(algo_10, 9, 1)
+        layout.addWidget(res_10, 9, 2)
+    if param.sma10 != 0:
+        layout.addWidget(algo_11, 10, 1)
+        layout.addWidget(res_11, 10, 2)
+    if param.sma20 != 0:
+        layout.addWidget(algo_12, 11, 1)
+        layout.addWidget(res_12, 11, 2)
+    if param.ema5 != 0:
+        layout.addWidget(algo_13, 12, 1)
+        layout.addWidget(res_13, 12, 2)
+    if param.ema10 != 0:
+        layout.addWidget(algo_14, 13, 1)
+        layout.addWidget(res_14, 13, 2)
+    if param.ema20 != 0:
+        layout.addWidget(algo_15, 14, 1)
+        layout.addWidget(res_15, 14, 2)
 
     layout.addWidget(time_label, 15, 0)
     layout.addWidget(algo_global, 15, 1, 1, 1) # row x/col x / high x / width x

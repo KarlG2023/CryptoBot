@@ -239,144 +239,174 @@ class analysis:
     # Function to access the status for each algorythm
 
     def get_rsi(self, crypto):
-        if crypto == "BTC":
-            return self.rsi_btc
-        if crypto == "ETH":     
-            return self.rsi_eth
-        if crypto == "LTC":  
-            return self.rsi_ltc
+        if param.rsi != 0:
+            if crypto == "BTC":
+                return self.rsi_btc
+            if crypto == "ETH":     
+                return self.rsi_eth
+            if crypto == "LTC":  
+                return self.rsi_ltc
+        return ACTION.ERROR
     
     def get_stochastique(self, crypto):
-        if crypto == "BTC":
-            return self.stochastique_btc
-        if crypto == "ETH":     
-            return self.stochastique_eth
-        if crypto == "LTC":  
-            return self.stochastique_ltc
+        if param.stochastique != 0:
+            if crypto == "BTC":
+                return self.stochastique_btc
+            if crypto == "ETH":     
+                return self.stochastique_eth
+            if crypto == "LTC":  
+                return self.stochastique_ltc
+        return ACTION.ERROR
     
     def get_cci(self, crypto):
-        if crypto == "BTC":
-            return self.cci_btc
-        if crypto == "ETH":     
-            return self.cci_eth
-        if crypto == "LTC":  
-            return self.cci_ltc
+        if param.cci != 0:
+            if crypto == "BTC":
+                return self.cci_btc
+            if crypto == "ETH":     
+                return self.cci_eth
+            if crypto == "LTC":  
+                return self.cci_ltc
+        return ACTION.ERROR
     
     def get_adi(self, crypto):
-        if crypto == "BTC":
-            return self.adi_btc
-        if crypto == "ETH":     
-            return self.adi_eth
-        if crypto == "LTC":  
-            return self.adi_ltc
+        if param.adi != 0:
+            if crypto == "BTC":
+                return self.adi_btc
+            if crypto == "ETH":     
+                return self.adi_eth
+            if crypto == "LTC":  
+                return self.adi_ltc
+        return ACTION.ERROR
     
     def get_awesome(self, crypto):
-        if crypto == "BTC":
-            return self.awesome_btc
-        if crypto == "ETH":     
-            return self.awesome_eth
-        if crypto == "LTC":  
-            return self.awesome_ltc
+        if param.awesome != 0:
+            if crypto == "BTC":
+                return self.awesome_btc
+            if crypto == "ETH":     
+                return self.awesome_eth
+            if crypto == "LTC":  
+                return self.awesome_ltc
+        return ACTION.ERROR
     
     def get_momentum(self, crypto):
-        if crypto == "BTC":
-            return self.momentum_btc
-        if crypto == "ETH":     
-            return self.momentum_eth
-        if crypto == "LTC":  
-            return self.momentum_eth
+        if param.momentum != 0:
+            if crypto == "BTC":
+                return self.momentum_btc
+            if crypto == "ETH":     
+                return self.momentum_eth
+            if crypto == "LTC":  
+                return self.momentum_eth
+        return ACTION.ERROR
     
     def get_macd(self, crypto):
-        if crypto == "BTC":
-            return self.macd_btc
-        if crypto == "ETH":     
-            return self.macd_eth
-        if crypto == "LTC":  
-            return self.macd_ltc
+        if param.macd != 0:
+            if crypto == "BTC":
+                return self.macd_btc
+            if crypto == "ETH":     
+                return self.macd_eth
+            if crypto == "LTC":  
+                return self.macd_ltc
+        return ACTION.ERROR
     
     def get_stochrsi(self, crypto):
-        if crypto == "BTC":
-            return self.stoch_rsi_btc
-        if crypto == "ETH":     
-            return self.stoch_rsi_eth
-        if crypto == "LTC":  
-            return self.stoch_rsi_ltc
+        if param.stochrsi != 0:
+            if crypto == "BTC": 
+                return self.stoch_rsi_btc
+            if crypto == "ETH":     
+                return self.stoch_rsi_eth
+            if crypto == "LTC":  
+                return self.stoch_rsi_ltc
+        return ACTION.ERROR
 
     def get_bullbear(self, crypto):
-        if crypto == "BTC":
-            return self.bull_bear_btc
-        if crypto == "ETH":     
-            return self.bull_bear_eth
-        if crypto == "LTC":  
-            return self.bull_bear_ltc
+        if param.bullbear != 0:
+            if crypto == "BTC":
+                return self.bull_bear_btc
+            if crypto == "ETH":     
+                return self.bull_bear_eth
+            if crypto == "LTC":  
+                return self.bull_bear_ltc
+        return ACTION.ERROR
     
     def get_sma5(self, crypto):
-        if crypto == "BTC":
-            return self.sma_5_btc
-        if crypto == "ETH":     
-            return self.sma_5_eth
-        if crypto == "LTC":  
-            return self.sma_5_ltc
-    
+        if param.sma5 != 0:
+            if crypto == "BTC":
+                return self.sma_5_btc
+            if crypto == "ETH":     
+                return self.sma_5_eth
+            if crypto == "LTC":  
+                return self.sma_5_ltc
+        return ACTION.ERROR
+
     def get_sma10(self, crypto):
-        if crypto == "BTC":
-            return self.sma_10_btc
-        if crypto == "ETH":     
-            return self.sma_10_eth
-        if crypto == "LTC":  
-            return self.sma_10_ltc
-    
+        if param.sma10 != 0:
+            if crypto == "BTC":
+                return self.sma_10_btc
+            if crypto == "ETH":     
+                return self.sma_10_eth
+            if crypto == "LTC":  
+                return self.sma_10_ltc
+        return ACTION.ERROR
+
     def get_sma20(self, crypto):
-        if crypto == "BTC":
-            return self.sma_20_btc
-        if crypto == "ETH":     
-            return self.sma_20_eth
-        if crypto == "LTC":  
-            return self.sma_20_ltc
+        if param.sma20 != 0:
+            if crypto == "BTC":
+                return self.sma_20_btc
+            if crypto == "ETH":     
+                return self.sma_20_eth
+            if crypto == "LTC":  
+                return self.sma_20_ltc
+        return ACTION.ERROR
     
     def get_ema5(self, crypto):
-        if crypto == "BTC":
-            return self.ema_5_btc
-        if crypto == "ETH":     
-            return self.ema_5_eth
-        if crypto == "LTC":  
-            return self.ema_5_ltc
-    
+        if param.ema5 != 0:
+            if crypto == "BTC":
+                return self.ema_5_btc
+            if crypto == "ETH":     
+                return self.ema_5_eth
+            if crypto == "LTC":  
+                return self.ema_5_ltc
+        return ACTION.ERROR
+
     def get_ema10(self, crypto):
-        if crypto == "BTC":
-            return self.ema_10_btc
-        if crypto == "ETH":     
-            return self.ema_10_eth
-        if crypto == "LTC":  
-            return self.ema_10_ltc
+        if param.ema10 != 0:
+            if crypto == "BTC":
+                return self.ema_10_btc
+            if crypto == "ETH":     
+                return self.ema_10_eth
+            if crypto == "LTC":  
+                return self.ema_10_ltc
+        return ACTION.ERROR
     
     def get_ema20(self, crypto):
-        if crypto == "BTC":
-            return self.ema_20_btc
-        if crypto == "ETH":     
-            return self.ema_20_eth
-        if crypto == "LTC":  
-            return self.ema_20_ltc
+        if param.ema20 != 0:
+            if crypto == "BTC":
+                return self.ema_20_btc
+            if crypto == "ETH":     
+                return self.ema_20_eth
+            if crypto == "LTC":  
+                return self.ema_20_ltc
+        return ACTION.ERROR
     
     # Recovers the cryptobot decision regarding a given crypto
 
     def get_status(self, crypto):
         if crypto == "BTC":
-            if (self.nbr_buy_btc > self.nbr_sell_btc + self.nbr_neutral_btc):
+            if (self.nbr_buy_btc > self.nbr_sell_btc and self.nbr_buy_btc > self.nbr_neutral_btc):
                 return ACTION.BUY
-            if (self.nbr_sell_btc > self.nbr_buy_btc + self.nbr_neutral_btc):
+            if (self.nbr_sell_btc > self.nbr_buy_btc and self.nbr_sell_btc > self.nbr_neutral_btc):
                 return ACTION.SELL
             return ACTION.NEUTRAL
         if crypto == "ETH":     
-            if (self.nbr_buy_eth > self.nbr_sell_eth + self.nbr_neutral_eth):
+            if (self.nbr_buy_eth > self.nbr_sell_eth and self.nbr_buy_eth > self.nbr_neutral_eth):
                 return ACTION.BUY
-            if (self.nbr_sell_eth > self.nbr_buy_eth + self.nbr_neutral_eth):
+            if (self.nbr_sell_eth > self.nbr_buy_eth and self.nbr_sell_eth > self.nbr_neutral_eth):
                 return ACTION.SELL
             return ACTION.NEUTRAL
         if crypto == "LTC":  
-            if (self.nbr_buy_ltc > self.nbr_sell_ltc + self.nbr_neutral_ltc):
+            if (self.nbr_buy_ltc > self.nbr_sell_ltc and self.nbr_buy_ltc > self.nbr_neutral_ltc):
                 return ACTION.BUY
-            if (self.nbr_sell_ltc > self.nbr_buy_ltc + self.nbr_neutral_ltc):
+            if (self.nbr_sell_ltc > self.nbr_buy_ltc and self.nbr_sell_ltc > self.nbr_neutral_ltc):
                 return ACTION.SELL
             return ACTION.NEUTRAL
         return ACTION.ERROR
@@ -396,48 +426,78 @@ class analysis:
 # oscillators
 
 def rsi(pair):
+    if param.rsi == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.rsi_oscillator(param.charts_json.get_json_data(pair))
 
 def stochastique(pair):
+    if param.stochastique == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.stochastique_oscillator(param.charts_json.get_json_data(pair))
 
 def cci(pair):
+    if param.cci == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.cci_oscillator(param.charts_json.get_json_data(pair))
 
 def adi(pair):
+    if param.adi == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.adi_oscillator(param.charts_json.get_json_data(pair))
 
 def awesome(pair):
+    if param.awesome == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.AwesomeOscillator(param.charts_json.get_json_data(pair))
 
 def momentum(pair):
+    if param.momentum == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.momentum_oscillator(param.charts_json.get_json_data(pair))
 
 def macd(pair):
+    if param.macd == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.macd_oscillator(param.charts_json.get_json_data(pair))
 
 def stoch_rsi(pair):
+    if param.stochrsi == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.stochastique_rsi(param.charts_json.get_json_data(pair))
 
 def bull_bear(pair):
+    if param.bullbear == 0:
+        return ACTION.ERROR
     return chart_analysis.oscillators.bull_bear_power(param.charts_json.get_json_data(pair))
 
 # moving_averages
 
 def sma_5(pair):
+    if param.sma5 == 0:
+        return ACTION.ERROR
     return chart_analysis.moving_averages.sma_5(param.charts_json.get_json_data(pair))
 
 def ema_5(pair):
+    if param.ema5 == 0:
+        return ACTION.ERROR
     return chart_analysis.moving_averages.ema_5(param.charts_json.get_json_data(pair))
 
 def sma_10(pair):
+    if param.sma10 == 0:
+        return ACTION.ERROR
     return chart_analysis.moving_averages.sma_10(param.charts_json.get_json_data(pair))
 
 def ema_10(pair):
+    if param.ema10 == 0:
+        return ACTION.ERROR
     return chart_analysis.moving_averages.ema_10(param.charts_json.get_json_data(pair))
 
 def sma_20(pair):
+    if param.sma20 == 0:
+        return ACTION.ERROR
     return chart_analysis.moving_averages.sma_20(param.charts_json.get_json_data(pair))
 
 def ema_20(pair):
+    if param.ema20 == 0:
+        return ACTION.ERROR
     return chart_analysis.moving_averages.ema_20(param.charts_json.get_json_data(pair))

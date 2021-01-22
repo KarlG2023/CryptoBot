@@ -95,6 +95,137 @@ class Param(QtWidgets.QWidget):
         layout.addWidget(self.b6, 7, 0)
 
         self.setLayout(layout)
+
+        # algo choice
+
+        self.algo_label = QtWidgets.QLabel("algorythms")
+        self.algo_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
+        self.algo_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.algo_label.setMaximumHeight(50)
+        layout.addWidget(self.algo_label, 8, 0, 1, 2)
+
+        self.a1 = QtWidgets.QCheckBox("Relative Strength Index (14)")
+        if param.rsi == 1:
+            self.a1.setChecked(True)
+        else:
+            self.a1.setChecked(False)
+  		
+        self.a2 = QtWidgets.QCheckBox("Stochastic (14,3,3)")
+        if param.stochastique == 1:
+            self.a2.setChecked(True)
+        else:
+            self.a2.setChecked(False)
+
+        self.a3 = QtWidgets.QCheckBox("Commodity Channel Index (20)")
+        if param.cci == 1:
+            self.a3.setChecked(True)
+        else:
+            self.a3.setChecked(False)
+        
+        self.a4 = QtWidgets.QCheckBox("Average Directional Index (14)")
+        if param.adi == 1:
+            self.a4.setChecked(True)
+        else:
+            self.a4.setChecked(False)
+        
+        self.a5 = QtWidgets.QCheckBox("Awesome Oscillator")
+        if param.awesome == 1:
+            self.a5.setChecked(True)
+        else:
+            self.a5.setChecked(False)
+        
+        self.a6 = QtWidgets.QCheckBox("Momentum (10)")
+        if param.momentum == 1:
+            self.a6.setChecked(True)
+        else:
+            self.a6.setChecked(False)
+        
+        self.a7 = QtWidgets.QCheckBox("MACD Level (12, 26)")
+        if param.macd == 1:
+            self.a7.setChecked(True)
+        else:
+            self.a7.setChecked(False)
+        
+        self.a8 = QtWidgets.QCheckBox("Stochastic RSI Fast (3, 3, 14, 14)")
+        if param.stochrsi == 1:
+            self.a8.setChecked(True)
+        else:
+            self.a8.setChecked(False)
+        
+        self.a9 = QtWidgets.QCheckBox("Bull Bear Power")
+        if param.bullbear == 1:
+            self.a9.setChecked(True)
+        else:
+            self.a9.setChecked(False)
+        
+        self.a10 = QtWidgets.QCheckBox("Exponential Moving Average (5)")
+        if param.ema5 == 1:
+            self.a10.setChecked(True)
+        else:
+            self.a10.setChecked(False)
+        
+        self.a11 = QtWidgets.QCheckBox("Exponential Moving Average (10)")
+        if param.ema10 == 1:
+            self.a11.setChecked(True)
+        else:
+            self.a11.setChecked(False)
+        
+        self.a12 = QtWidgets.QCheckBox("Exponential Moving Average (20)")
+        if param.ema20 == 1:
+            self.a12.setChecked(True)
+        else:
+            self.a12.setChecked(False)
+        
+        self.a13 = QtWidgets.QCheckBox("Simple Moving Average (5)")
+        if param.sma5 == 1:
+            self.a13.setChecked(True)
+        else:
+            self.a13.setChecked(False)
+        
+        self.a14 = QtWidgets.QCheckBox("Simple Moving Average (10)")
+        if param.sma10 == 1:
+            self.a14.setChecked(True)
+        else:
+            self.a14.setChecked(False)
+
+        self.a15 = QtWidgets.QCheckBox("Simple Moving Average (20)")
+        if param.sma20 == 1:
+            self.a15.setChecked(True)
+        else:
+            self.a15.setChecked(False)
+        
+        self.a1.toggled.connect(lambda:self.btnstate(self.a1))
+        self.a2.toggled.connect(lambda:self.btnstate(self.a2))
+        self.a3.toggled.connect(lambda:self.btnstate(self.a3))
+        self.a4.toggled.connect(lambda:self.btnstate(self.a4))
+        self.a5.toggled.connect(lambda:self.btnstate(self.a5))
+        self.a6.toggled.connect(lambda:self.btnstate(self.a6))
+        self.a7.toggled.connect(lambda:self.btnstate(self.a7))
+        self.a8.toggled.connect(lambda:self.btnstate(self.a8))
+        self.a9.toggled.connect(lambda:self.btnstate(self.a9))
+        self.a10.toggled.connect(lambda:self.btnstate(self.a10))
+        self.a11.toggled.connect(lambda:self.btnstate(self.a11))
+        self.a12.toggled.connect(lambda:self.btnstate(self.a12))
+        self.a13.toggled.connect(lambda:self.btnstate(self.a13))
+        self.a14.toggled.connect(lambda:self.btnstate(self.a14))
+        self.a15.toggled.connect(lambda:self.btnstate(self.a15))
+        layout.addWidget(self.a1, 9, 0)
+        layout.addWidget(self.a2, 10, 0)
+        layout.addWidget(self.a3, 11, 0)
+        layout.addWidget(self.a4, 12, 0)
+        layout.addWidget(self.a5, 13, 0)
+        layout.addWidget(self.a6, 14, 0)
+        layout.addWidget(self.a7, 15, 0)
+        layout.addWidget(self.a8, 16, 0)
+        layout.addWidget(self.a9, 17, 0)
+        layout.addWidget(self.a10, 18, 0)
+        layout.addWidget(self.a11, 19, 0)
+        layout.addWidget(self.a12, 20, 0)
+        layout.addWidget(self.a13, 21, 0)
+        layout.addWidget(self.a14, 22, 0)
+        layout.addWidget(self.a15, 23, 0)
+
+        self.setLayout(layout)
   
     def btnstate(self,b):
         if b.text() == "15 minutes":
@@ -123,3 +254,93 @@ class Param(QtWidgets.QWidget):
             if b.isChecked() == True:
                 param.window_x = 1610
                 param.window_y = 990
+        
+        if b.text() == "Relative Strength Index (14)":
+            if b.isChecked() == True:
+                param.rsi = 1
+            else:
+                param.rsi = 0
+
+        if b.text() == "Stochastic (14,3,3)":
+            if b.isChecked() == True:
+                param.stochastique = 1
+            else:
+                param.stochastique = 0
+        
+        if b.text() == "Commodity Channel Index (20)":
+            if b.isChecked() == True:
+                param.cci = 1
+            else:
+                param.cci = 0
+        
+        if b.text() == "Average Directional Index (14)":
+            if b.isChecked() == True:
+                param.adi = 1
+            else:
+                param.adi = 0
+        
+        if b.text() == "Awesome Oscillator":
+            if b.isChecked() == True:
+                param.awesome = 1
+            else:
+                param.awesome = 0
+        
+        if b.text() == "Momentum (10)":
+            if b.isChecked() == True:
+                param.momentum = 1
+            else:
+                param.momentum = 0
+
+        if b.text() == "MACD Level (12, 26)":
+            if b.isChecked() == True:
+                param.macd = 1
+            else:
+                param.macd = 0
+        
+        if b.text() == "Stochastic RSI Fast (3, 3, 14, 14)":
+            if b.isChecked() == True:
+                param.stochrsi = 1
+            else:
+                param.stochrsi = 0
+        
+        if b.text() == "Bull Bear Power":
+            if b.isChecked() == True:
+                param.bullbear = 1
+            else:
+                param.bullbear = 0
+        
+        if b.text() == "Exponential Moving Average (5)":
+            if b.isChecked() == True:
+                param.ema5 = 1
+            else:
+                param.ema5 = 0
+        
+        if b.text() == "Exponential Moving Average (10)":
+            if b.isChecked() == True:
+                param.ema10 = 1
+            else:
+                param.ema10 = 0
+
+        if b.text() == "Exponential Moving Average (20)":
+            if b.isChecked() == True:
+                param.ema20 = 1
+            else:
+                param.ema20 = 0
+        
+        if b.text() == "Simple Moving Average (5)":
+            if b.isChecked() == True:
+                param.sma5 = 1
+            else:
+                param.sma5 = 0
+        
+        if b.text() == "Simple Moving Average (10)":
+            if b.isChecked() == True:
+                param.sma10 = 1
+            else:
+                param.sma10 = 0
+        
+        if b.text() == "Simple Moving Average (20)":
+            if b.isChecked() == True:
+                param.sma20 = 1
+            else:
+                param.sma20 = 0

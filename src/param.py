@@ -18,6 +18,10 @@ def init():
     window_x = 1280
     window_y = 720
 
+def init_algo():
+    global rsi, stochastique, cci, adi, awesome, momentum, macd, stochrsi, bullbear, sma5, sma10, sma20, ema5, ema10, ema20
+
+    rsi=stochastique=cci=adi=awesome=momentum=macd=stochrsi=bullbear=sma5=sma10=sma20=ema5=ema10=ema20=1
 
 def init_account():
     global balance, trades_btc, trades_eth, trades_ltc

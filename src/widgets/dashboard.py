@@ -140,10 +140,8 @@ def get_data(layout):
 def change_status():
     if param.bot_status == 0:
         param.bot_status = 1
-        print("start")
     else:
         param.bot_status = 0
-        print("stop")
 
 class Dashboard(QtWidgets.QWidget):
     def __init__(self, parent=None):
