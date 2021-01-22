@@ -34,7 +34,7 @@ class Param(QtWidgets.QWidget):
         self.candle_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
         self.candle_label.setAlignment(QtCore.Qt.AlignCenter)
         self.candle_label.setMaximumHeight(50)
-        layout.addWidget(self.candle_label, 0, 0, 1, 2)
+        layout.addWidget(self.candle_label, 0, 0, 1, 3)
 
         self.b1 = QtWidgets.QCheckBox("15 minutes")
         if param.candle_size == 900:
@@ -67,7 +67,7 @@ class Param(QtWidgets.QWidget):
         self.resize_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
         self.resize_label.setAlignment(QtCore.Qt.AlignCenter)
         self.resize_label.setMaximumHeight(50)
-        layout.addWidget(self.resize_label, 4, 0, 1, 2)
+        layout.addWidget(self.resize_label, 4, 0, 1, 3)
 
         self.b4 = QtWidgets.QCheckBox("780*700")
         if param.window_x == 780 and param.window_y == 700:
@@ -102,7 +102,7 @@ class Param(QtWidgets.QWidget):
         self.algo_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
         self.algo_label.setAlignment(QtCore.Qt.AlignCenter)
         self.algo_label.setMaximumHeight(50)
-        layout.addWidget(self.algo_label, 8, 0, 1, 2)
+        layout.addWidget(self.algo_label, 8, 0, 1, 3)
 
         self.a1 = QtWidgets.QCheckBox("Relative Strength Index (14)")
         if param.rsi == 1:
@@ -214,16 +214,16 @@ class Param(QtWidgets.QWidget):
         layout.addWidget(self.a3, 11, 0)
         layout.addWidget(self.a4, 12, 0)
         layout.addWidget(self.a5, 13, 0)
-        layout.addWidget(self.a6, 14, 0)
-        layout.addWidget(self.a7, 15, 0)
-        layout.addWidget(self.a8, 16, 0)
-        layout.addWidget(self.a9, 17, 0)
-        layout.addWidget(self.a10, 18, 0)
-        layout.addWidget(self.a11, 19, 0)
-        layout.addWidget(self.a12, 20, 0)
-        layout.addWidget(self.a13, 21, 0)
-        layout.addWidget(self.a14, 22, 0)
-        layout.addWidget(self.a15, 23, 0)
+        layout.addWidget(self.a6, 9, 1)
+        layout.addWidget(self.a7, 10, 1)
+        layout.addWidget(self.a8, 11, 1)
+        layout.addWidget(self.a9, 12, 1)
+        layout.addWidget(self.a10, 13, 1)
+        layout.addWidget(self.a11, 9, 2)
+        layout.addWidget(self.a12, 10, 2)
+        layout.addWidget(self.a13, 11, 2)
+        layout.addWidget(self.a14, 12, 2)
+        layout.addWidget(self.a15, 13, 2)
 
         self.setLayout(layout)
   

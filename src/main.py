@@ -80,7 +80,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if int(time.strftime("%S")) == 10 and param.bot_status == 1:
             if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
-                param.balance['BTC'] = (price / param.balance['USDT'])/100
+                param.balance['BTC'] = param.balance['USDT'] / price
                 param.balance['USDT'] = 0
                 print("BOUGHT BTC at " + str(price))
                 print("Balance: " + str(param.balance))
@@ -94,7 +94,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
-                param.balance['ETH'] = (price / param.balance['USDT'])/100
+                param.balance['ETH'] = param.balance['USDT'] / price
                 param.balance['USDT'] = 0
                 print("BOUGHT ETH at " + str(price))
                 print("Balance: " + str(param.balance))
@@ -108,7 +108,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
-                param.balance['LTC'] = (price / param.balance['USDT'])/100
+                param.balance['LTC'] = param.balance['USDT'] / price
                 param.balance['USDT'] = 0
                 print("BOUGHT LTC at " + str(price))
                 print("Balance: " + str(param.balance))
