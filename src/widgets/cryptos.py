@@ -47,7 +47,7 @@ def print_action(status):
         res = QtWidgets.QLabel('Sell')
         res.setAlignment(QtCore.Qt.AlignCenter)
         res.setStyleSheet("background-color: #ff8080;border-radius: 10px")
-        res.setMaximumWidth(60)
+        res.setMaximumWidth(100)
         res.setMinimumHeight(20)
         return res
     if status == chart_analysis.analysis.ACTION.NEUTRAL:
