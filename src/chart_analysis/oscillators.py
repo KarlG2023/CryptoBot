@@ -37,11 +37,11 @@ def rsi_oscillator(json_data):
 #        print(str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "\n")
 #        print("rsi_14    " + str(rsi))
 
-    if rsi < 30:
+    if rsi < 35:
         return chart_analysis.analysis.ACTION.BUY
-    if rsi > 70:
+    if rsi > 65:
         return chart_analysis.analysis.ACTION.SELL
-    if rsi > 30 and rsi < 70:
+    if rsi > 35 and rsi < 65:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 
@@ -65,11 +65,11 @@ def stochastique_oscillator(json_data):
     # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
     #     print("stocha    " + str(stochastique))
 
-    if stochastique < 20:
+    if stochastique < 30:
         return chart_analysis.analysis.ACTION.BUY
-    if stochastique > 80:
+    if stochastique > 70:
         return chart_analysis.analysis.ACTION.SELL
-    if stochastique > 20 and stochastique < 80:
+    if stochastique > 30 and stochastique < 70:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 

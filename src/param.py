@@ -24,11 +24,13 @@ def init_algo():
     rsi=stochastique=cci=adi=awesome=momentum=macd=stochrsi=bullbear=sma5=sma10=sma20=ema5=ema10=ema20=1
 
 def init_account():
-    global balance, trades_btc, trades_eth, trades_ltc
+    global balance, bull_strength, bear_strength, trades_btc, trades_eth, trades_ltc
 
     # balance = api_request.account.get_balance(poloniex_obj)
     balance = {'USDT': 1000.0, 'BTC': 0.0, 'ETH': 0.0, 'LTC': 0.0} # test
 
+    bull_strength = {'BTC': 0.1, 'ETH': 0.1, 'LTC': 0.1}
+    bear_strength = {'BTC': 0.9, 'ETH': 0.9, 'LTC': 0.9}
 
     trades_btc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
     trades_eth = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
@@ -36,6 +38,6 @@ def init_account():
 
 def init_json():
     global candle_size, charts_json, cryptobot
-    candle_size = 900
+    candle_size = 300
     charts_json = data.charts.charts_json(poloniex_obj, candle_size)
     cryptobot = chart_analysis.analysis.analysis()
