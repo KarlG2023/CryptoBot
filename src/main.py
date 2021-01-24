@@ -93,7 +93,7 @@ class MainWindow(QtWidgets.QMainWindow):
             duration = 1
 
         if int(time.strftime("%S")) == 1 and param.bot_status == 2:
-            param.bot_status == 1
+            param.bot_status = 1
 
         if int(time.strftime(period))%duration == update_latency and int(time.strftime("%S")) == 0 and param.bot_status == 1:
             param.bot_status = 2
