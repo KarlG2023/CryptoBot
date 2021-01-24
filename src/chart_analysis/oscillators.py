@@ -177,9 +177,9 @@ def adi_oscillator(json_data):
     
     if adi < 20:
         return chart_analysis.analysis.ACTION.BUY
-    if adi > 25:
+    if adi > 30:
         return chart_analysis.analysis.ACTION.SELL
-    if adi > 20 and adi < 25:
+    if adi > 20 and adi < 30:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 

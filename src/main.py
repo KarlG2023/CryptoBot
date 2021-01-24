@@ -79,12 +79,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
         period = ""
         duration = 0
+        update_latency = 0
         if param.candle_size == 900:
             period = "%M"
             duration = 15
+            update_latency = 3
         if param.candle_size == 14400:
             period = "%H"
             duration = 4
+            update_latency = 1
         if param.candle_size == 86400:
             period = "%D"
             duration = 1
@@ -92,8 +95,8 @@ class MainWindow(QtWidgets.QMainWindow):
         if int(time.strftime("%S")) == 1 and param.bot_status == 2:
             param.bot_status == 1
 
-        if int(time.strftime(period))%duration == 0 and int(time.strftime("%S")) == 0 and param.bot_status == 1:
-            param.bot_status == 2
+        if int(time.strftime(period))%duration == update_latency and int(time.strftime("%S")) == 0 and param.bot_status == 1:
+            param.bot_status = 2
             if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['BTC'], 2))
