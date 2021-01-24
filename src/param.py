@@ -38,6 +38,6 @@ def init_account():
 
 def init_json():
     global candle_size, charts_json, cryptobot
-    candle_size = 300
+    candle_size = 900
     charts_json = data.charts.charts_json(poloniex_obj, candle_size)
     cryptobot = chart_analysis.analysis.analysis()
