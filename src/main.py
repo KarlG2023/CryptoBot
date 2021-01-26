@@ -107,7 +107,12 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
                     print("BOUGHT BTC at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
-            
+                if param.balance['USDT'] - (quantity * price) < 1:
+                    param.balance['BTC'] = param.balance['BTC'] + (param.balance['USDT'] / price)
+                    param.balance['USDT'] = 0
+                    print("BOUGHT BTC at " + str(price))
+                    print("Balance: " + str(param.balance) + "\n")
+
             if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.SELL and param.balance['BTC'] != 0:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
                 quantity = (param.balance['BTC'])*(pow(param.bear_strength['BTC'], 2))
@@ -116,6 +121,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.bear_strength['BTC'] -= 0.1
                     param.balance['USDT'] += price * quantity
                     param.balance['BTC'] = param.balance['BTC'] - quantity
+                    print("SOLD BTC at " + str(price))
+                    print("Balance: " + str(param.balance) + "\n")
+                if (param.balance['BTC'] * price) - quantity * price < 1:
+                    param.balance['USDT'] += price * param.balance['BTC']
+                    param.balance['BTC'] = 0
                     print("SOLD BTC at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
 
@@ -129,6 +139,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
                     print("BOUGHT ETH at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
+                if param.balance['USDT'] - (quantity * price) < 1:
+                    param.balance['ETH'] = param.balance['ETH'] + (param.balance['USDT'] / price)
+                    param.balance['USDT'] = 0
+                    print("BOUGHT ETH at " + str(price))
+                    print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.SELL and param.balance['ETH'] != 0:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
@@ -138,6 +153,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.bear_strength['ETH'] -= 0.1
                     param.balance['USDT'] += price * quantity
                     param.balance['ETH'] = param.balance['ETH'] - quantity
+                    print("SOLD ETH at " + str(price))
+                    print("Balance: " + str(param.balance) + "\n")
+                if (param.balance['ETH'] * price) - quantity * price < 1:
+                    param.balance['USDT'] += price * param.balance['ETH']
+                    param.balance['ETH'] = 0
                     print("SOLD ETH at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
 
@@ -151,6 +171,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
                     print("BOUGHT LTC at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
+                if param.balance['USDT'] - (quantity * price) < 1:
+                    param.balance['LTC'] = param.balance['LTC'] + (param.balance['USDT'] / price)
+                    param.balance['USDT'] = 0
+                    print("BOUGHT LTC at " + str(price))
+                    print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.SELL and param.balance['LTC'] != 0:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
@@ -160,6 +185,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.bear_strength['LTC'] -= 0.1
                     param.balance['USDT'] += price * quantity
                     param.balance['LTC'] = param.balance['LTC'] - quantity
+                    print("SOLD LTC at " + str(price))
+                    print("Balance: " + str(param.balance) + "\n")
+                if (param.balance['LTC'] * price) - quantity * price < 1:
+                    param.balance['USDT'] += price * param.balance['LTC']
+                    param.balance['LTC'] = 0
                     print("SOLD LTC at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
             

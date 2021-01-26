@@ -63,7 +63,10 @@ def getOrderTrades(poloniex, orderNumber):
 # be limited to one day.
 
 def getTradeHistory(poloniex, currencyPair, start, end, limit):
-    return poloniex.returnTradeHistory(currencyPair, start, end, limit)
+    try:
+        return poloniex.returnTradeHistory(currencyPair, start, end, limit)
+    except:
+        return "[An exception occured.]"
 
 # Returns the past 200 trades for a given market, or up to 50,000
 # trades between a range specified in UNIX timestamps by the "start"
