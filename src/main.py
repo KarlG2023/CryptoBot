@@ -195,6 +195,7 @@ class MainWindow(QtWidgets.QMainWindow):
             
         if int(time.strftime("%S")) == 30:
             param.charts_json = data.charts.charts_json(param.poloniex_obj, param.candle_size)
+            param.estimate_balance = param.balance['USDT'] + (api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last'] * param.balance['BTC']) + (api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last'] * param.balance['ETH']) + (api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last'] * param.balance['LTC'])
         if int(time.strftime("%S")) == 40:
             param.cryptobot.btc_update()
             param.trades_btc = str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))

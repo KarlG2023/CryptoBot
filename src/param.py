@@ -24,10 +24,11 @@ def init_algo():
     rsi=stochastique=cci=adi=awesome=momentum=macd=stochrsi=bullbear=sma5=sma10=sma20=ema5=ema10=ema20=1
 
 def init_account():
-    global balance, bull_strength, bear_strength, trades_btc, trades_eth, trades_ltc
+    global balance, bull_strength, bear_strength, estimate_balance, trades_btc, trades_eth, trades_ltc
 
     # balance = api_request.account.get_balance(poloniex_obj)
     balance = {'USDT': 1000.0, 'BTC': 0.0, 'ETH': 0.0, 'LTC': 0.0} # test
+    estimate_balance = balance['USDT'] + (api_request.charts.get_ticker(poloniex_obj)['USDT_BTC']['last'] * balance['BTC']) + (api_request.charts.get_ticker(poloniex_obj)['USDT_ETH']['last'] * balance['ETH']) + (api_request.charts.get_ticker(poloniex_obj)['USDT_LTC']['last'] * balance['LTC'])
 
     bull_strength = {'BTC': 0.1, 'ETH': 0.1, 'LTC': 0.1}
     bear_strength = {'BTC': 0.9, 'ETH': 0.9, 'LTC': 0.9}

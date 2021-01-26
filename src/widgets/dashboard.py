@@ -26,14 +26,18 @@ import param #pylint: disable=import-error
 
 def get_account_data(currency):
     last_trades = ""
-    balance = "Balance:\n" + str(param.balance[currency]) + " " + currency + "\n\n"
-
+    balance = "Balance:\n" + str(param.balance[currency]) + " " + currency + "\n"
+    
+    if currency == "USDT":
+        summary = balance
+        summary += "\nTotal Balance:\n" + str(param.estimate_balance) + " " + currency + "\n"
+        return summary
     if currency == "BTC":
-        last_trades = "Previous trades order:\n" + param.trades_btc
+        last_trades = "\nPrevious trades order:\n" + param.trades_btc
     if currency == "ETH":
-        last_trades = "Previous trades order:\n" + param.trades_eth
+        last_trades = "\nPrevious trades order:\n" + param.trades_eth
     if currency == "LTC":
-        last_trades = "Previous trades order:\n" + param.trades_ltc
+        last_trades = "\nPrevious trades order:\n" + param.trades_ltc
     return balance + last_trades
 
 def print_action(status):
