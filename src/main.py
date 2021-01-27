@@ -113,7 +113,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['BTC'] = param.balance['BTC'] + (param.balance['USDT'] / price)
                     param.balance['USDT'] = 0
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
-                    print("BOUGHT " + param.balance['USDT'] / price + " BTC at " + str(price))
+                    print("BOUGHT " + str(param.balance['USDT'] / price) + " BTC at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.SELL and param.balance['BTC'] != 0:
@@ -149,7 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['ETH'] = param.balance['ETH'] + (param.balance['USDT'] / price)
                     param.balance['USDT'] = 0
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
-                    print("BOUGHT " + param.balance['USDT'] / price + " ETH at " + str(price))
+                    print("BOUGHT " + str(param.balance['USDT'] / price) + " ETH at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.SELL and param.balance['ETH'] != 0:
@@ -185,7 +185,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['LTC'] = param.balance['LTC'] + (param.balance['USDT'] / price)
                     param.balance['USDT'] = 0
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
-                    print("BOUGHT " + param.balance['USDT'] / price + " LTC at " + str(price))
+                    print("BOUGHT " + str(param.balance['USDT'] / price) + " LTC at " + str(price))
                     print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.SELL and param.balance['LTC'] != 0:
