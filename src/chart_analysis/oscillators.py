@@ -39,9 +39,9 @@ def rsi_oscillator(json_data):
 
     if rsi < 35:
         return chart_analysis.analysis.ACTION.BUY
-    if rsi > 65:
+    if rsi > 60:
         return chart_analysis.analysis.ACTION.SELL
-    if rsi > 35 and rsi < 65:
+    if rsi > 35 and rsi < 60:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 

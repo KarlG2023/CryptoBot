@@ -30,7 +30,8 @@ def get_account_data(currency):
     
     if currency == "USDT":
         summary = balance
-        summary += "\nTotal Balance:\n" + str(param.estimate_balance) + " " + currency + "\n"
+        summary += "\nTotal Balance:\n" + str(param.estimate_balance) + " USDT\n"
+        summary += "\nReturn on investment:\n" + str(param.estimate_balance - param.investment) + " USDT\n"
         return summary
     if currency == "BTC":
         last_trades = "\nPrevious trades order:\n" + param.trades_btc
