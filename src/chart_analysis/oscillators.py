@@ -118,7 +118,7 @@ def cci_oscillator(json_data):
 
 def adi_oscillator(json_data):
     candles = len(param.charts_json.get_candle(json_data, "volume"))-1
-    rsi = rsi_oscillator(json_data)
+    stocha = stochastique_oscillator(json_data)
     positiv_dm = 0.00
     negativ_dm = 0.00
     tr = 0
@@ -176,18 +176,18 @@ def adi_oscillator(json_data):
     # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
     #     print("adi       " + str(adi))
     
-    if adi < 20 and rsi == chart_analysis.analysis.ACTION.BUY:
+    if adi < 20 and stocha == chart_analysis.analysis.ACTION.BUY:
         return chart_analysis.analysis.ACTION.BUY
-    if adi < 20 and rsi == chart_analysis.analysis.ACTION.SELL:
+    if adi < 20 and stocha == chart_analysis.analysis.ACTION.SELL:
         return chart_analysis.analysis.ACTION.SELL
-    if adi < 20 and rsi == chart_analysis.analysis.ACTION.NEUTRAL:
+    if adi < 20 and stocha == chart_analysis.analysis.ACTION.NEUTRAL:
         return chart_analysis.analysis.ACTION.NEUTRAL
 
-    if adi > 30 and rsi == chart_analysis.analysis.ACTION.BUY:
+    if adi > 30 and stocha == chart_analysis.analysis.ACTION.BUY:
         return chart_analysis.analysis.ACTION.BUY
-    if adi > 30 and rsi == chart_analysis.analysis.ACTION.SELL:
+    if adi > 30 and stocha == chart_analysis.analysis.ACTION.SELL:
         return chart_analysis.analysis.ACTION.SELL
-    if adi > 30 and rsi == chart_analysis.analysis.ACTION.NEUTRAL:
+    if adi > 30 and stocha == chart_analysis.analysis.ACTION.NEUTRAL:
         return chart_analysis.analysis.ACTION.NEUTRAL
     
     if adi > 20 and adi < 30:
