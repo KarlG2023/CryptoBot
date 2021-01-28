@@ -34,9 +34,9 @@ def init_account():
     bull_strength = {'BTC': 0.1, 'ETH': 0.1, 'LTC': 0.1}
     bear_strength = {'BTC': 0.9, 'ETH': 0.9, 'LTC': 0.9}
 
-    trades_btc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
-    trades_eth = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
-    trades_ltc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+    trades_btc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_BTC", start=int(time.time())-(86400), end=int(time.time()), limit=10))
+    trades_eth = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400), end=int(time.time()), limit=10))
+    trades_ltc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_LTC", start=int(time.time())-(86400), end=int(time.time()), limit=10))
 
 def init_json():
     global candle_size, charts_json, cryptobot

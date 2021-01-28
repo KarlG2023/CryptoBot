@@ -211,13 +211,13 @@ class MainWindow(QtWidgets.QMainWindow):
             param.estimate_balance = param.balance['USDT'] + (api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last'] * param.balance['BTC']) + (api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last'] * param.balance['ETH']) + (api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last'] * param.balance['LTC'])
         if int(time.strftime("%S")) == 40:
             param.cryptobot.btc_update()
-            param.trades_btc = str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_BTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+            param.trades_btc = str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_BTC", start=int(time.time())-(86400), end=int(time.time()), limit=10))
         if int(time.strftime("%S")) == 45:
             param.cryptobot.eth_update()
-            param.trades_btc = str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_ETH", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+            param.trades_eth = str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_ETH", start=int(time.time())-(86400), end=int(time.time()), limit=10))
         if int(time.strftime("%S")) == 50:
             param.cryptobot.ltc_update()
-            param.trades_btc = str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_LTC", start=int(time.time())-(86400*30), end=int(time.time()), limit=10))
+            param.trades_ltc = str(api_request.trades.getTradeHistory(param.poloniex_obj, "USDT_LTC", start=int(time.time())-(86400), end=int(time.time()), limit=10))
 
     # update widgets data
     def widgets_update(self):
