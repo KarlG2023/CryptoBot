@@ -212,9 +212,9 @@ def AwesomeOscillator(json_data):
     # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
     #     print("AO        " + str(AO))
 
-    if AO < 0:
-        return chart_analysis.analysis.ACTION.SELL
     if AO > 0:
+        return chart_analysis.analysis.ACTION.SELL
+    if AO < 0:
         return chart_analysis.analysis.ACTION.BUY
     return chart_analysis.analysis.ACTION.ERROR
 
