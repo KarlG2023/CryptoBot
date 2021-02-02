@@ -221,19 +221,19 @@ def AwesomeOscillator(json_data):
 # The Momentum Indicator (MOM) is a leading indicator measuring a security's rate-of-change.
 # It compares the current price with the previous price from a number of periods ago.
 
-def momentum_oscillator(json_data):
+def momentum_oscillator(json_data): # not working well last test
     candles = len(param.charts_json.get_candle(json_data, "volume"))-1
 
     momentum = 100 * (float(param.charts_json.get_candle(json_data, "close")[candles]) / float(param.charts_json.get_candle(json_data, "close")[candles-10]))
 
     # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
-    #     print("MOMENTUM  " + str(momentum))
+        # print("MOMENTUM  " + str(momentum))
 
-    if momentum < 80:
+    if momentum < 90:
         return chart_analysis.analysis.ACTION.BUY
-    if momentum > 90:
+    if momentum > 100:
         return chart_analysis.analysis.ACTION.SELL
-    if momentum > 80 and momentum < 90:
+    if momentum > 90 and momentum < 100:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 
@@ -316,11 +316,11 @@ def stochastique_rsi(json_data):
     # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
     #     print("stochrsi  " + str(stoch_rsi))
 
-    if stoch_rsi < 0.30:
+    if stoch_rsi < 0.25:
         return chart_analysis.analysis.ACTION.BUY
-    if stoch_rsi > 0.70:
+    if stoch_rsi > 0.65:
         return chart_analysis.analysis.ACTION.SELL
-    if stoch_rsi > 0.30 and stoch_rsi < 0.70:
+    if stoch_rsi > 0.25 and stoch_rsi < 0.65:
         return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 
