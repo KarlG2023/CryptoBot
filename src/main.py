@@ -74,7 +74,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.widgets_update()
 
         # update balance (comment for test phase)
-        if int(time.strftime("%M")) == 0:
+        if int(time.strftime("%S")) == 0:
             param.balance = api_request.account.get_balance(param.poloniex_obj)
 
         period = ""
@@ -116,7 +116,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " BTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
                 if param.balance['USDT'] - (quantity * price) < 1:
                     # param.balance['BTC'] = param.balance['BTC'] + (param.balance['USDT'] / price)
                     # param.balance['USDT'] = 0
@@ -125,7 +125,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(param.balance['USDT'] / price) + " BTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.SELL and param.balance['BTC'] != 0:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
@@ -145,7 +145,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " BTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
                 if (param.balance['BTC'] * price) - quantity * price < 1:
                     # param.balance['USDT'] += price * param.balance['BTC']
                     # param.balance['BTC'] = 0
@@ -154,7 +154,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " BTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
@@ -174,7 +174,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " ETH at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
                 if param.balance['USDT'] - (quantity * price) < 1:
                     # param.balance['ETH'] = param.balance['ETH'] + (param.balance['USDT'] / price)
                     # param.balance['USDT'] = 0
@@ -183,7 +183,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(param.balance['USDT'] / price) + " ETH at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.SELL and param.balance['ETH'] != 0:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
@@ -203,7 +203,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " ETH at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
                 if (param.balance['ETH'] * price) - quantity * price < 1:
                     # param.balance['USDT'] += price * param.balance['ETH']
                     # param.balance['ETH'] = 0
@@ -212,7 +212,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD ETH at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
@@ -232,7 +232,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " LTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
                 if param.balance['USDT'] - (quantity * price) < 1:
                     # param.balance['LTC'] = param.balance['LTC'] + (param.balance['USDT'] / price)
                     # param.balance['USDT'] = 0
@@ -241,7 +241,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(param.balance['USDT'] / price) + " LTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
 
             if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.SELL and param.balance['LTC'] != 0:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
@@ -261,7 +261,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " LTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
                 if (param.balance['LTC'] * price) - quantity * price < 1:
                     # param.balance['USDT'] += price * param.balance['LTC']
                     # param.balance['LTC'] = 0
@@ -270,7 +270,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD LTC at " + str(price))
-                    print("Balance: " + str(param.balance) + "\n")
+                    # print("Balance: " + str(param.balance) + "\n")
             
         if int(time.strftime("%S")) == 30:
             param.charts_json = data.charts.charts_json(param.poloniex_obj, param.candle_size)
