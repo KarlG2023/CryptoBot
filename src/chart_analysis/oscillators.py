@@ -221,7 +221,7 @@ def AwesomeOscillator(json_data):
 # The Momentum Indicator (MOM) is a leading indicator measuring a security's rate-of-change.
 # It compares the current price with the previous price from a number of periods ago.
 
-def momentum_oscillator(json_data): # not working well last test
+def momentum_oscillator(json_data): # not working
     candles = len(param.charts_json.get_candle(json_data, "volume"))-1
 
     momentum = 100 * (float(param.charts_json.get_candle(json_data, "close")[candles]) / float(param.charts_json.get_candle(json_data, "close")[candles-10]))
@@ -229,12 +229,10 @@ def momentum_oscillator(json_data): # not working well last test
     # if int(time.strftime("%M")) % 1 == 0 and int(time.strftime("%S")) == 0:
         # print("MOMENTUM  " + str(momentum))
 
-    if momentum < 90:
+    if momentum < 100:
         return chart_analysis.analysis.ACTION.BUY
     if momentum > 100:
         return chart_analysis.analysis.ACTION.SELL
-    if momentum > 90 and momentum < 100:
-        return chart_analysis.analysis.ACTION.NEUTRAL
     return chart_analysis.analysis.ACTION.ERROR
 
 # MACD is an extremely popular indicator used in technical analysis.
