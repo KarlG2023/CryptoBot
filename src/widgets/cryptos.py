@@ -28,11 +28,11 @@ import param #pylint: disable=import-error
 def get_account_data(currency):
     balance = "Balance:\n" + str(param.balance[currency]) + " " + currency + "\n\n"
     if currency == "BTC":
-        last_trades = "Previous trades order:\n" + str(param.trades_btc['date'])
+        last_trades = "Previous trades order:\n" + param.trades_btc
     if currency == "ETH":
-        last_trades = "Previous trades order:\n" + str(param.trades_eth['date'])
+        last_trades = "Previous trades order:\n" + param.trades_eth
     if currency == "LTC":
-        last_trades = "Previous trades order:\n" + str(param.trades_ltc['date'])
+        last_trades = "Previous trades order:\n" + param.trades_ltc
     return balance + last_trades
 
 def print_action(status):

@@ -34,11 +34,11 @@ def get_account_data(currency):
         summary += "\nReturn on investment:\n" + str(param.estimate_balance - param.investment) + " USDT\n"
         return summary
     if currency == "BTC":
-        last_trades = "\nPrevious trades order:\n" + str(param.trades_btc['date'])
+        last_trades = "\nPrevious trades order:\n" + param.trades_btc
     if currency == "ETH":
-        last_trades = "\nPrevious trades order:\n" + str(param.trades_eth['date'])
+        last_trades = "\nPrevious trades order:\n" + param.trades_eth
     if currency == "LTC":
-        last_trades = "\nPrevious trades order:\n" + str(param.trades_ltc['date'])
+        last_trades = "\nPrevious trades order:\n" + param.trades_ltc
     return balance + last_trades
 
 def print_action(status):
