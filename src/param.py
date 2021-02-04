@@ -27,8 +27,8 @@ def init_account():
     global balance, bull_strength, bear_strength, estimate_balance, investment, trades_btc, trades_eth, trades_ltc
     global btc_order, eth_order, ltc_order
 
-    # balance = api_request.account.get_balance(poloniex_obj)
-    balance = {'USDT': 1000.0, 'BTC': 0.0, 'ETH': 0.0, 'LTC': 0.0} # test
+    balance = api_request.account.get_balance(poloniex_obj)
+    # balance = {'USDT': 1000.0, 'BTC': 0.0, 'ETH': 0.0, 'LTC': 0.0} # test
 
     estimate_balance = balance['USDT'] + (api_request.charts.get_ticker(poloniex_obj)['USDT_BTC']['last'] * balance['BTC']) + (api_request.charts.get_ticker(poloniex_obj)['USDT_ETH']['last'] * balance['ETH']) + (api_request.charts.get_ticker(poloniex_obj)['USDT_LTC']['last'] * balance['LTC'])
     investment = estimate_balance

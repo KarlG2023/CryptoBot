@@ -74,8 +74,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.widgets_update()
 
         # update balance (comment for test phase)
-        # if int(time.strftime("%S")) == 0:
-        #     # param.balance = api_request.account.get_balance(param.poloniex_obj)
+        if int(time.strftime("%S")) == 0:
+            param.balance = api_request.account.get_balance(param.poloniex_obj)
 
         period = ""
         duration = 0
@@ -107,6 +107,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['BTC'] = param.balance['BTC'] + quantity
                     param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order)
                     # param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -116,6 +117,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['BTC'] = param.balance['BTC'] + (param.balance['USDT'] / price)
                     param.balance['USDT'] = 0
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order)
                     # param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, param.balance['USDT'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -131,6 +133,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] += price * quantity
                     param.balance['BTC'] = param.balance['BTC'] - quantity
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order)
                     # param.btc_order = api_request.trades.sell(param.poloniex_obj, "USDT_BTC", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -140,6 +143,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] += price * param.balance['BTC']
                     param.balance['BTC'] = 0
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order)
                     # param.btc_order = api_request.trades.sell(param.poloniex_obj, "USDT_BTC", price, param.balance['BTC'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -155,6 +159,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['ETH'] = param.balance['ETH'] + quantity
                     param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order)
                     # param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -164,6 +169,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['ETH'] = param.balance['ETH'] + (param.balance['USDT'] / price)
                     param.balance['USDT'] = 0
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order)
                     # param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, param.balance['USDT'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -179,6 +185,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] += price * quantity
                     param.balance['ETH'] = param.balance['ETH'] - quantity
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order)
                     # param.eth_order = api_request.trades.sell(param.poloniex_obj, "USDT_ETH", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -188,6 +195,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] += price * param.balance['ETH']
                     param.balance['ETH'] = 0
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order)
                     # param.eth_order = api_request.trades.sell(param.poloniex_obj, "USDT_ETH", price, param.balance['ETH'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -203,6 +211,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['LTC'] = param.balance['LTC'] + quantity
                     param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order)
                     # param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, quantity, 0, 0, 0)
                     
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -212,6 +221,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['LTC'] = param.balance['LTC'] + (param.balance['USDT'] / price)
                     param.balance['USDT'] = 0
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order)
                     # param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, param.balance['USDT'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -227,6 +237,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] += price * quantity
                     param.balance['LTC'] = param.balance['LTC'] - quantity
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order)
                     # param.ltc_order = api_request.trades.sell(param.poloniex_obj, "USDT_LTC", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -236,6 +247,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     param.balance['USDT'] += price * param.balance['LTC']
                     param.balance['LTC'] = 0
 
+                    # api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order)
                     # param.ltc_order = api_request.trades.sell(param.poloniex_obj, "USDT_LTC", price, param.balance['LTC'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
