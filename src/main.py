@@ -104,9 +104,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['BTC'], 2))
 
-                if param.btc_order['orderNumber'] != []:
-                    api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order['orderNumber'])
-                    param.btc_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
+                # if param.btc_order['orderNumber'] != []:
+                #     api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order['orderNumber'])
+                #     param.btc_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
 
                 if param.balance['USDT'] - (quantity * price) > 1:
                     param.bear_strength['BTC'] = 0.9
@@ -131,9 +131,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
 
-                if param.btc_order['orderNumber'] != []:
-                    api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order['orderNumber'])
-                    param.btc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
+                # if param.btc_order['orderNumber'] != []:
+                #     api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order['orderNumber'])
+                #     param.btc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
 
                 quantity = (param.balance['BTC'])*(pow(param.bear_strength['BTC'], 2))
                 if (param.balance['BTC'] * price) - quantity * price > 1:
@@ -160,9 +160,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['ETH'], 2))
 
-                if param.eth_order['orderNumber'] != []:
-                    api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order['orderNumber'])
-                    param.eth_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
+                # if param.eth_order['orderNumber'] != []:
+                #     api_request.teth_orderrades.cancelOrder(param.poloniex_obj, param.eth_order['orderNumber'])
+                #     param.['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
 
                 if param.balance['USDT'] - (quantity * price) > 1:
                     param.bear_strength['ETH'] = 0.9
@@ -188,9 +188,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
                 quantity = (param.balance['ETH'])*(pow(param.bear_strength['ETH'], 2))
 
-                if param.eth_order['orderNumber'] != []:
-                    api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order['orderNumber'])
-                    param.eth_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
+                # if param.eth_order['orderNumber'] != []:
+                #     api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order['orderNumber'])
+                #     param.eth_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
 
                 if (param.balance['ETH'] * price) - quantity * price > 1:
                     param.bull_strength['ETH'] = 0.1
@@ -216,9 +216,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['LTC'], 2))
 
-                if param.ltc_order['orderNumber'] != []:
-                    api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order['orderNumber'])
-                    param.ltc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
+                # if param.ltc_order['orderNumber'] != []:
+                #     api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order['orderNumber'])
+                #     param.ltc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
 
                 if param.balance['USDT'] - (quantity * price) > 1:
                     param.bear_strength['LTC'] = 0.9
@@ -244,9 +244,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
                 quantity = (param.balance['LTC'])*(pow(param.bear_strength['LTC'], 2))
 
-                if param.ltc_order['orderNumber'] != []:
-                    api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order['orderNumber'])
-                    param.ltc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
+                # if param.ltc_order['orderNumber'] != []:
+                #     api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order['orderNumber'])
+                #     param.ltc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
                 
                 if (param.balance['LTC'] * price) - quantity * price > 1:
                     param.bull_strength['LTC'] = 0.1
