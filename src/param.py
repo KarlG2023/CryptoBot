@@ -40,9 +40,9 @@ def init_account():
     trades_eth = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400), end=int(time.time()), limit=10))
     trades_ltc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_LTC", start=int(time.time())-(86400), end=int(time.time()), limit=10))
 
-    btc_order = 0
-    eth_order = 0
-    ltc_order = 0
+    btc_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
+    eth_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
+    ltc_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
 
 def init_json():
     global candle_size, charts_json, cryptobot
