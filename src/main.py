@@ -68,14 +68,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.timer.timeout.connect(self.update)
         self.timer.start(500)
 
+    # deletes order older than 15min
+    def order_update(self, pair):
+        orders = api_request.trades.getOpenOrders(param.poloniex_obj, pair)
+        for i in range(0, len(orders)):
+            api_request.trades.cancelOrder(param.poloniex_obj, orders[i]['orderNumber'])
+
     # using the timer for repetitiv actions
     def update(self):
         self.setFixedSize(param.window_x, param.window_y)
         self.widgets_update()
 
+        # to make sure every action isnt done more than once every second
+        if int(time.strftime("%S")) == 1 and param.bot_status == 2:
+            param.bot_status = 1
+
         # update balance (comment for test phase)
-        if int(time.strftime("%S")) == 0:
-            # print(api_request.trades.buy(param.poloniex_obj, "USDT_BTC", 30000, 0.0001, 0, 0, 0))
+        if int(time.strftime("%S")) == 0 and param.bot_status == 1:
             param.balance = api_request.account.get_balance(param.poloniex_obj)
 
         period = ""
@@ -92,36 +101,26 @@ class MainWindow(QtWidgets.QMainWindow):
         if param.candle_size == 86400:
             period = "%D"
             duration = 1
-
-        if int(time.strftime("%S")) == 1 and param.bot_status == 2:
-            param.bot_status = 1
         
         # condition d'achat
         if int(time.strftime(period))%duration == update_latency and int(time.strftime("%S")) == 0 and param.bot_status == 1:
             param.bot_status = 2
-            if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
+            self.order_update("USDT_BTC")
+            self.order_update("USDT_ETH")
+            self.order_update("USDT_LTC")
+            if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['BTC'], 2))
 
-                # if param.btc_order['orderNumber'] != []:
-                #     api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order['orderNumber'])
-                #     param.btc_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
-
                 if param.balance['USDT'] - (quantity * price) > 1:
                     param.bear_strength['BTC'] = 0.9
                     param.bull_strength['BTC'] += 0.1
-                    # param.balance['BTC'] = param.balance['BTC'] + quantity
-                    # param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
-                    
                     param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " BTC at " + str(price))
                 if param.balance['USDT'] - (quantity * price) < 1:
-                    # param.balance['BTC'] = param.balance['BTC'] + (param.balance['USDT'] / price)
-                    # param.balance['USDT'] = 0
-
                     param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, param.balance['USDT'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -131,53 +130,33 @@ class MainWindow(QtWidgets.QMainWindow):
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
 
-                # if param.btc_order['orderNumber'] != []:
-                #     api_request.trades.cancelOrder(param.poloniex_obj, param.btc_order['orderNumber'])
-                #     param.btc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
-
                 quantity = (param.balance['BTC'])*(pow(param.bear_strength['BTC'], 2))
                 if (param.balance['BTC'] * price) - quantity * price > 1:
                     param.bull_strength['BTC'] = 0.1
                     param.bear_strength['BTC'] -= 0.1
-                    # param.balance['USDT'] += price * quantity
-                    # param.balance['BTC'] = param.balance['BTC'] - quantity
-
                     param.btc_order = api_request.trades.sell(param.poloniex_obj, "USDT_BTC", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " BTC at " + str(price))
                 if (param.balance['BTC'] * price) - quantity * price < 1:
-                    # param.balance['USDT'] += price * param.balance['BTC']
-                    # param.balance['BTC'] = 0
-
                     param.btc_order = api_request.trades.sell(param.poloniex_obj, "USDT_BTC", price, param.balance['BTC'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " BTC at " + str(price))
 
-            if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
+            if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['ETH'], 2))
 
-                # if param.eth_order['orderNumber'] != []:
-                #     api_request.teth_orderrades.cancelOrder(param.poloniex_obj, param.eth_order['orderNumber'])
-                #     param.['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
-
                 if param.balance['USDT'] - (quantity * price) > 1:
                     param.bear_strength['ETH'] = 0.9
                     param.bull_strength['ETH'] += 0.1
-                    # param.balance['ETH'] = param.balance['ETH'] + quantity
-                    # param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
-
                     param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " ETH at " + str(price))
                 if param.balance['USDT'] - (quantity * price) < 1:
-                    # param.balance['ETH'] = param.balance['ETH'] + (param.balance['USDT'] / price)
-                    # param.balance['USDT'] = 0
-
                     param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, param.balance['USDT'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -188,52 +167,32 @@ class MainWindow(QtWidgets.QMainWindow):
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
                 quantity = (param.balance['ETH'])*(pow(param.bear_strength['ETH'], 2))
 
-                # if param.eth_order['orderNumber'] != []:
-                #     api_request.trades.cancelOrder(param.poloniex_obj, param.eth_order['orderNumber'])
-                #     param.eth_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
-
                 if (param.balance['ETH'] * price) - quantity * price > 1:
                     param.bull_strength['ETH'] = 0.1
                     param.bear_strength['ETH'] -= 0.1
-                    # param.balance['USDT'] += price * quantity
-                    # param.balance['ETH'] = param.balance['ETH'] - quantity
-
                     param.eth_order = api_request.trades.sell(param.poloniex_obj, "USDT_ETH", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " ETH at " + str(price))
                 if (param.balance['ETH'] * price) - quantity * price < 1:
-                    # param.balance['USDT'] += price * param.balance['ETH']
-                    # param.balance['ETH'] = 0
-
                     param.eth_order = api_request.trades.sell(param.poloniex_obj, "USDT_ETH", price, param.balance['ETH'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD ETH at " + str(price))
 
-            if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] != 0:
+            if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['LTC'], 2))
 
-                # if param.ltc_order['orderNumber'] != []:
-                #     api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order['orderNumber'])
-                #     param.ltc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
-
                 if param.balance['USDT'] - (quantity * price) > 1:
                     param.bear_strength['LTC'] = 0.9
                     param.bull_strength['LTC'] += 0.1
-                    # param.balance['LTC'] = param.balance['LTC'] + quantity
-                    # param.balance['USDT'] = param.balance['USDT'] - (quantity * price)
-
                     param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, quantity, 0, 0, 0)
                     
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " LTC at " + str(price))
                 if param.balance['USDT'] - (quantity * price) < 1:
-                    # param.balance['LTC'] = param.balance['LTC'] + (param.balance['USDT'] / price)
-                    # param.balance['USDT'] = 0
-
                     param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, param.balance['USDT'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -244,24 +203,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
                 quantity = (param.balance['LTC'])*(pow(param.bear_strength['LTC'], 2))
 
-                # if param.ltc_order['orderNumber'] != []:
-                #     api_request.trades.cancelOrder(param.poloniex_obj, param.ltc_order['orderNumber'])
-                #     param.ltc_order['orderNumber'] = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
-                
                 if (param.balance['LTC'] * price) - quantity * price > 1:
                     param.bull_strength['LTC'] = 0.1
                     param.bear_strength['LTC'] -= 0.1
-                    # param.balance['USDT'] += price * quantity
-                    # param.balance['LTC'] = param.balance['LTC'] - quantity
-
                     param.ltc_order = api_request.trades.sell(param.poloniex_obj, "USDT_LTC", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " LTC at " + str(price))
                 if (param.balance['LTC'] * price) - quantity * price < 1:
-                    # param.balance['USDT'] += price * param.balance['LTC']
-                    # param.balance['LTC'] = 0
-
                     param.ltc_order = api_request.trades.sell(param.poloniex_obj, "USDT_LTC", price, param.balance['LTC'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")

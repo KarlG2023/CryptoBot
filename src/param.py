@@ -25,10 +25,8 @@ def init_algo():
 
 def init_account():
     global balance, bull_strength, bear_strength, estimate_balance, investment, trades_btc, trades_eth, trades_ltc
-    global btc_order, eth_order, ltc_order
 
     balance = api_request.account.get_balance(poloniex_obj)
-    # balance = {'USDT': 1000.0, 'BTC': 0.0, 'ETH': 0.0, 'LTC': 0.0} # test
 
     estimate_balance = balance['USDT'] + (api_request.charts.get_ticker(poloniex_obj)['USDT_BTC']['last'] * balance['BTC']) + (api_request.charts.get_ticker(poloniex_obj)['USDT_ETH']['last'] * balance['ETH']) + (api_request.charts.get_ticker(poloniex_obj)['USDT_LTC']['last'] * balance['LTC'])
     investment = estimate_balance
@@ -39,10 +37,6 @@ def init_account():
     trades_btc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_BTC", start=int(time.time())-(86400), end=int(time.time()), limit=10))
     trades_eth = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_ETH", start=int(time.time())-(86400), end=int(time.time()), limit=10))
     trades_ltc = str(api_request.trades.getTradeHistory(poloniex_obj, "USDT_LTC", start=int(time.time())-(86400), end=int(time.time()), limit=10))
-
-    btc_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_BTC'}
-    eth_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_ETH'}
-    ltc_order = {'orderNumber': [], 'resultingTrades': [], 'tokenFee': 0, 'tokenFeeCurrency': None, 'fee': 0.00125, 'currencyPair': 'USDT_LTC'}
 
 def init_json():
     global candle_size, charts_json, cryptobot
