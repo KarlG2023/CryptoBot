@@ -79,9 +79,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setFixedSize(param.window_x, param.window_y)
         self.widgets_update()
 
-        # update balance (comment for test phase)
+        # update balance
         if int(time.strftime("%S")) == 0:
             param.balance = api_request.account.get_balance(param.poloniex_obj)
+
+            # price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
+            # quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['BTC'], 2))
+            # print("need to check if i have enough")
+            # print(price)
+            # print(quantity)
+            # print(quantity*price)
+            # if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
+            #     print("ok i can buy")
 
         period = ""
         duration = 0
@@ -104,13 +113,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.order_update("USDT_ETH")
             self.order_update("USDT_LTC")
             if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
+                param.bear_strength['BTC'] = 0.9
+                param.bull_strength['BTC'] += 0.1
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['BTC'], 2))
 
                 if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
-                    param.bear_strength['BTC'] = 0.9
-                    param.bull_strength['BTC'] += 0.1
                     param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -140,13 +149,13 @@ class MainWindow(QtWidgets.QMainWindow):
                     print("SOLD " + str(quantity) + " BTC at " + str(price))
 
             if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
+                param.bear_strength['ETH'] = 0.9
+                param.bull_strength['ETH'] += 0.1
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['ETH'], 2))
 
                 if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
-                    param.bear_strength['ETH'] = 0.9
-                    param.bull_strength['ETH'] += 0.1
                     param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, quantity, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -176,13 +185,13 @@ class MainWindow(QtWidgets.QMainWindow):
                     print("SOLD ETH at " + str(price))
 
             if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
+                param.bear_strength['LTC'] = 0.9
+                param.bull_strength['LTC'] += 0.1
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['LTC'], 2))
 
                 if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
-                    param.bear_strength['LTC'] = 0.9
-                    param.bull_strength['LTC'] += 0.1
                     param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, quantity, 0, 0, 0)
                     
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
