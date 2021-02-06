@@ -28,8 +28,7 @@ class Param(QtWidgets.QWidget):
 
         layout = QtWidgets.QGridLayout()
 
-        # candle size
-
+        # candle size settings
         self.candle_label = QtWidgets.QLabel("candle length")
         self.candle_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
         self.candle_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -61,8 +60,7 @@ class Param(QtWidgets.QWidget):
         layout.addWidget(self.b2, 2, 0)
         layout.addWidget(self.b3, 3, 0)
 
-        # window size
-
+        # window size settings
         self.resize_label = QtWidgets.QLabel("window size")
         self.resize_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
         self.resize_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -96,8 +94,7 @@ class Param(QtWidgets.QWidget):
 
         self.setLayout(layout)
 
-        # algo choice
-
+        # algo choice settings
         self.algo_label = QtWidgets.QLabel("algorythms")
         self.algo_label.setStyleSheet("background-color: #e6e6e6;border-style: outset;border-width: 2px;border-radius: 10px;border-color: grey;padding: 6px;")
         self.algo_label.setAlignment(QtCore.Qt.AlignCenter)

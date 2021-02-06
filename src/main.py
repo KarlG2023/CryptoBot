@@ -66,7 +66,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def time(self):
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.update)
-        self.timer.start(500)
+        self.timer.start(1000)
 
     # deletes order older than 15min
     def order_update(self, pair):
@@ -79,12 +79,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setFixedSize(param.window_x, param.window_y)
         self.widgets_update()
 
-        # to make sure every action isnt done more than once every second
-        if int(time.strftime("%S")) == 1 and param.bot_status == 2:
-            param.bot_status = 1
-
         # update balance (comment for test phase)
-        if int(time.strftime("%S")) == 0 and param.bot_status == 1:
+        if int(time.strftime("%S")) == 0:
             param.balance = api_request.account.get_balance(param.poloniex_obj)
 
         period = ""
@@ -104,7 +100,6 @@ class MainWindow(QtWidgets.QMainWindow):
         
         # condition d'achat
         if int(time.strftime(period))%duration == update_latency and int(time.strftime("%S")) == 0 and param.bot_status == 1:
-            param.bot_status = 2
             self.order_update("USDT_BTC")
             self.order_update("USDT_ETH")
             self.order_update("USDT_LTC")
@@ -232,8 +227,6 @@ class MainWindow(QtWidgets.QMainWindow):
     # update widgets data
     def widgets_update(self):
         self.central_widget.removeWidget(self.widget)
-        if self.tab == Tab.PARAM:
-            self.widget = widgets.parameters.Param(self)
         if self.tab == Tab.DASHBOARD:
             self.widget = widgets.dashboard.Dashboard(self)
         if self.tab == Tab.BITCOIN:
