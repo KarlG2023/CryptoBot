@@ -17,7 +17,10 @@ def log(api_key, api_secret):
 # Returns all of your available balances.
 
 def get_balance(poloniex):
-    return poloniex.returnBalances()
+    try:
+        return poloniex.returnBalances()
+    except:
+        return "[An exception occured.]"
 
 # Returns your balances sorted by account. You may optionally specify
 # the "account" POST parameter if you wish to fetch only the balances of
