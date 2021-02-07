@@ -66,7 +66,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def time(self):
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.update)
-        self.timer.start(500) # 1000 for ui and 500 for the rest
+        self.timer.start(500) # 1000 for ui and 500 for the rest / or change algo conditions for 500ms (no if %S == 0)
 
     # deletes order older than 15min
     def order_update(self, pair):
@@ -83,15 +83,6 @@ class MainWindow(QtWidgets.QMainWindow):
         if int(time.strftime("%S")) == 0:
             param.balance = api_request.account.get_balance(param.poloniex_obj)
 
-            # price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
-            # quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['BTC'], 2))
-            # print("need to check if i have enough")
-            # print(price)
-            # print(quantity)
-            # print(quantity*price)
-            # if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
-            #     print("ok i can buy")
-
         period = ""
         duration = 0
         update_latency = 0
@@ -107,7 +98,7 @@ class MainWindow(QtWidgets.QMainWindow):
             period = "%D"
             duration = 1
         
-        # condition d'achat
+        # condition d'achat // put back param.bot_status == 2 to dodge the double call at 0.5ms ?
         if int(time.strftime(period))%duration == update_latency and int(time.strftime("%S")) == 0 and param.bot_status == 1:
             self.order_update("USDT_BTC")
             self.order_update("USDT_ETH")
@@ -142,7 +133,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " BTC at " + str(price))
-                if (param.balance['BTC'] * price) - quantity * price < 1:
+                if (param.balance['BTC'] * price) < 1:
                     param.btc_order = api_request.trades.sell(param.poloniex_obj, "USDT_BTC", price, param.balance['BTC'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -178,7 +169,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " ETH at " + str(price))
-                if (param.balance['ETH'] * price) - quantity * price < 1:
+                if (param.balance['ETH'] * price) < 1:
                     param.eth_order = api_request.trades.sell(param.poloniex_obj, "USDT_ETH", price, param.balance['ETH'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
@@ -214,7 +205,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("SOLD " + str(quantity) + " LTC at " + str(price))
-                if (param.balance['LTC'] * price) - quantity * price < 1:
+                if (param.balance['LTC'] * price) < 1:
                     param.ltc_order = api_request.trades.sell(param.poloniex_obj, "USDT_LTC", price, param.balance['LTC'], 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
