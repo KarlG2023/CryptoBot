@@ -228,6 +228,8 @@ class MainWindow(QtWidgets.QMainWindow):
     # update widgets data
     def widgets_update(self):
         self.central_widget.removeWidget(self.widget)
+        if self.tab == Tab.PARAM:
+            self.widget = widgets.parameters.Param(self)
         if self.tab == Tab.DASHBOARD:
             self.widget = widgets.dashboard.Dashboard(self)
         if self.tab == Tab.BITCOIN:
