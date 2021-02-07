@@ -110,6 +110,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 param.bear_strength['BTC'] = 0.9
                 param.bull_strength['BTC'] += 0.1
 
+                print("\n--DEBUG--\nBTC")
+                print(quantity * price)
                 if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
                     param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, quantity, 0, 0, 0)
 
@@ -146,6 +148,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 param.bear_strength['ETH'] = 0.9
                 param.bull_strength['ETH'] += 0.1
 
+                print("\n--DEBUG--\nETH")
+                print(quantity * price)
                 if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
                     param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, quantity, 0, 0, 0)
 
@@ -182,6 +186,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 param.bear_strength['LTC'] = 0.9
                 param.bull_strength['LTC'] += 0.1
 
+                print("\n--DEBUG--\nLTC")
+                print(quantity * price)
                 if param.balance['USDT'] - (quantity * price) > 1 and (quantity * price) > 1.1:
                     param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, quantity, 0, 0, 0)
                     
