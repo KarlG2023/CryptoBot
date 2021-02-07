@@ -116,7 +116,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " BTC at " + str(price))
                 if param.balance['USDT'] - (quantity * price) < 1:
-                    param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, param.balance['USDT'], 0, 0, 0)
+                    param.btc_order = api_request.trades.buy(param.poloniex_obj, "USDT_BTC", price, param.balance['USDT'] - 0.5, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(param.balance['USDT'] / price) + " BTC at " + str(price))
@@ -152,7 +152,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " ETH at " + str(price))
                 if param.balance['USDT'] - (quantity * price) < 1:
-                    param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, param.balance['USDT'], 0, 0, 0)
+                    param.eth_order = api_request.trades.buy(param.poloniex_obj, "USDT_ETH", price, param.balance['USDT'] - 0.5, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(param.balance['USDT'] / price) + " ETH at " + str(price))
@@ -188,7 +188,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(quantity) + " LTC at " + str(price))
                 if param.balance['USDT'] - (quantity * price) < 1:
-                    param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, param.balance['USDT'], 0, 0, 0)
+                    param.ltc_order = api_request.trades.buy(param.poloniex_obj, "USDT_LTC", price, param.balance['USDT'] - 0.5, 0, 0, 0)
 
                     print("[" + str(time.strftime("%H")) + ":" + str(time.strftime("%M")) + ":" + str(time.strftime("%S")) + "]")
                     print("BOUGHT " + str(param.balance['USDT'] / price) + " LTC at " + str(price))
