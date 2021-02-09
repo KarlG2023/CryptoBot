@@ -315,9 +315,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    with open("style/style.qss", "r") as f:
-        _style = f.read()
-        app.setStyleSheet(_style)
+    # with open("style/style.qss", "r") as f:
+    #     _style = f.read()
+    #     app.setStyleSheet(_style)
     dashboard = MainWindow()
     dashboard.resize(param.window_x, param.window_y)
     dashboard.show()
