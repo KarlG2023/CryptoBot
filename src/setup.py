@@ -34,4 +34,6 @@ setup(  name = "CryptoBot",
         version = "0.1",
         description = "A great trading app",
         options = {"build_exe": build_exe_options},
-        executables = [Executable("main.py", base=base)])
+        executables = [Executable("main.py", icon="../assets/icon.ico", target_name="CryptoBot")])
+
+# python3 setup.py build && cp -r ../assets build
