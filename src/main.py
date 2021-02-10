@@ -104,7 +104,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.order_update("USDT_ETH")
             self.order_update("USDT_LTC")
             param.balance = api_request.account.get_balance(param.poloniex_obj)
-            if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
+            if param.cryptobot.get_status("BTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1 and param.bull_strength['ETH'] == 0.1 and param.bull_strength['LTC'] == 0.1:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_BTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['BTC'], 2))
                 param.bear_strength['BTC'] = 0.9
@@ -142,7 +142,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     print("SOLD " + str(quantity) + " BTC at " + str(price))
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
 
-            if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
+            if param.cryptobot.get_status("ETH") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1 and param.bull_strength['BTC'] == 0.1 and param.bull_strength['LTC'] == 0.1:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_ETH']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['ETH'], 2))
                 param.bear_strength['ETH'] = 0.9
@@ -180,7 +180,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     print("SOLD ETH at " + str(price))
                 param.balance = api_request.account.get_balance(param.poloniex_obj)
 
-            if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1:
+            if param.cryptobot.get_status("LTC") == chart_analysis.analysis.ACTION.BUY and param.balance['USDT'] > 1 and param.bull_strength['BTC'] == 0.1 and param.bull_strength['ETH'] == 0.1:
                 price = api_request.charts.get_ticker(param.poloniex_obj)['USDT_LTC']['last']
                 quantity = (param.balance['USDT'] / price)*(pow(param.bull_strength['LTC'], 2))
                 param.bear_strength['LTC'] = 0.9
